@@ -18,7 +18,8 @@ This is a static site. Deploy the repository root to any static host (Vercel, Cl
 ## Structure
 
 ```
-index.html          # Landing page (from VVV Stealth Landing.html)
-assets/             # Static assets (Kamereo icon, etc.)
+public/
+  index.html        # Landing page (from VVV Stealth Landing.html)
+  assets/           # Static assets (Kamereo icon, etc.)
 reference/          # Brand guidelines, design system, and source screenshots
 ```

@@ -4,9 +4,9 @@
   "private": true,
   "description": "Velocity Ventures Vietnam stealth landing page",
   "scripts": {
-    "dev": "serve .",
-    "start": "serve .",
-    "build": "echo 'Static site — no build step required'"
+    "dev": "serve public",
+    "start": "serve public",
+    "build": "test -f public/index.html"
   },
   "devDependencies": {
     "serve": "^14.2.4"
