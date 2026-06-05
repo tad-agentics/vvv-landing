@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocity Ventures Vietnam</title>
+<meta name="description" content="Velocity Ventures Vietnam — backing and building the next generation of AI companies, from Vietnam. In stealth.">
+<meta name="theme-color" content="#08080a">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Velocity Ventures Vietnam">
+<meta property="og:description" content="Backing and building the next generation of AI companies — from Vietnam.">
+<meta property="og:url" content="https://velocityvv.com">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20120%20120'%3E%3Crect%20width='120'%20height='120'%20rx='26'%20fill='%2308080a'/%3E%3Cpath%20d='M22%2044%20L60%2086%20L98%2044'%20stroke='%23ff2b2b'%20stroke-width='11'%20fill='none'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Cpath%20d='M41%2044%20L60%2065%20L79%2044'%20stroke='%23ff2b2b'%20stroke-width='11'%20fill='none'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.55'/%3E%3C/svg%3E">
+<script>document.documentElement.className='js preload';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#08080a;
+    --graphite:#16161a;
+    --graphite-2:#101013;
+    --steel:#8f8f97;
+    --bone:#f4f2ec;
+    --velocity:#ff2b2b;
+    --redline:#c40d0d;
+    --line:rgba(255,255,255,.12);
+    --faint:rgba(255,255,255,.06);
+    --faint-ink:#71717a;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'Be Vietnam Pro',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+    --gut:clamp(1.5rem,5.5vw,5.5rem);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--carbon);color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+  /* film-grain overlay — identity carry-over */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.035;mix-blend-mode:screen;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--velocity);color:#fff}
+
+  .mono{font-family:var(--mono)}
+  .accent{color:var(--velocity)}
+
+  section{padding:clamp(5rem,12vh,9rem) var(--gut);position:relative}
+
+  /* ===================== HERO ===================== */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:var(--gut);position:relative;overflow:hidden}
+  /* faint 115deg speed lines, top-right */
+  .hero::after{content:"";position:absolute;top:0;right:0;width:52%;height:100%;pointer-events:none;opacity:.55;z-index:0;
+    background:repeating-linear-gradient(115deg,transparent 0 44px,rgba(255,255,255,.022) 44px 45px);
+    -webkit-mask-image:linear-gradient(115deg,transparent 35%,#000 100%);mask-image:linear-gradient(115deg,transparent 35%,#000 100%)}
+  .hero > *{position:relative;z-index:1}
+
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .hero-mark{width:72px;height:72px;color:var(--velocity)}
+  .hero-tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--steel);text-align:right;line-height:1.8;white-space:nowrap}
+  .hero-tag .red{color:var(--velocity)}
+
+  .hero-center{max-width:20ch}
+  .hero h1{font-weight:900;letter-spacing:-.04em;line-height:.86;font-size:clamp(3.4rem,12vw,10rem)}
+  .hero .hlead{color:#c9c7c1;font-size:clamp(1.05rem,1.9vw,1.45rem);max-width:42ch;margin-top:1.8rem;line-height:1.5;font-weight:400}
+
+  .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint-ink);gap:1rem;flex-wrap:wrap}
+  .hero-bottom .red{color:var(--velocity)}
+
+  /* ===================== SHARED ===================== */
+  .eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--velocity);display:flex;align-items:center;gap:.85rem;margin-bottom:2rem}
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--velocity)}
+
+  /* ===================== 01 THESIS ===================== */
+  .thesis{max-width:1180px}
+  .thesis .statement{font-weight:800;letter-spacing:-.025em;line-height:1.08;font-size:clamp(1.9rem,4.4vw,3.4rem);max-width:17ch}
+  .thesis .statement .soft{color:var(--steel)}
+  .thesis .body{color:var(--steel);font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.6;max-width:50ch;margin-top:2.4rem;border-top:1px solid var(--faint);padding-top:2rem}
+
+  /* ===================== 02 PORTFOLIO ===================== */
+  .pf-lead{font-weight:800;letter-spacing:-.02em;line-height:1.05;font-size:clamp(1.7rem,3.6vw,2.8rem);max-width:16ch;margin-bottom:3rem}
+  .kam-card{border:1px solid var(--line);background:var(--graphite-2);border-radius:10px;padding:clamp(2rem,4vw,3.2rem);max-width:760px;position:relative;overflow:hidden}
+  .kam-card::after{content:"";position:absolute;top:0;right:0;width:40%;height:100%;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(115deg,transparent 0 30px,rgba(255,255,255,.02) 30px 31px);
+    -webkit-mask-image:linear-gradient(115deg,transparent 40%,#000 100%);mask-image:linear-gradient(115deg,transparent 40%,#000 100%)}
+  .kam-card > *{position:relative;z-index:1}
+  .kam-head{display:flex;align-items:center;gap:1.15rem;margin-bottom:1.25rem}
+  .kam-logo{width:60px;height:60px;border-radius:15px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 22px rgba(0,0,0,.4)}
+  .kam-logo img{width:100%;height:100%;display:block}
+  .kam-wordmark{font-weight:900;font-size:clamp(1.9rem,4.4vw,2.7rem);letter-spacing:-.03em;line-height:1;display:flex;align-items:baseline;gap:.04em}
+  .kam-wordmark .dot{color:var(--velocity)}
+  .kam-desc{color:#c9c7c1;font-size:clamp(1.02rem,1.6vw,1.2rem);margin-top:1.1rem;line-height:1.5;max-width:38ch}
+  .chips{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.2rem}
+  .chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone);border:1px solid var(--line);border-radius:5px;padding:.6rem .9rem;white-space:nowrap}
+  .chip .red{color:var(--velocity)}
+  .kam-caption{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-top:1.9rem;padding-top:1.5rem;border-top:1px solid var(--faint)}
+  .pf-foot{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint-ink);margin-top:2.4rem;display:flex;align-items:center;gap:.7rem}
+  .pf-foot::before{content:"";width:24px;height:1px;background:#3a3a40}
+
+  /* ===================== 03 WHAT WE ARE ===================== */
+  .identity{text-align:center;min-height:78svh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .identity .statement{font-weight:900;letter-spacing:-.03em;line-height:1.04;font-size:clamp(2rem,5.2vw,4rem);max-width:18ch}
+  .identity .statement .soft{color:var(--steel)}
+  .identity .sub{font-family:var(--mono);font-size:clamp(.72rem,1.1vw,.86rem);letter-spacing:.26em;text-transform:uppercase;color:var(--steel);margin-top:2.6rem;display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center}
+  .identity .sub i{color:var(--velocity);font-style:normal}
+  .identity .sub span{white-space:nowrap}
+
+  /* ===================== 04 CONTACT / FOOTER ===================== */
+  .contact{border-top:1px solid var(--faint)}
+  .contact .ask{font-weight:700;letter-spacing:-.015em;line-height:1.2;font-size:clamp(1.5rem,3.2vw,2.4rem);max-width:20ch}
+  .contact .mail{font-family:var(--mono);color:var(--velocity);font-size:clamp(1.05rem,2.2vw,1.5rem);letter-spacing:.02em;margin-top:1.8rem;display:inline-block;border-bottom:1px solid transparent;transition:border-color .25s var(--ease)}
+  .contact .mail:hover{border-color:var(--velocity)}
+  a:focus-visible{outline:2px solid var(--velocity);outline-offset:4px;border-radius:2px}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem;margin-top:clamp(4rem,9vh,7rem);padding-top:2rem;border-top:1px solid var(--faint)}
+  .foot-id{display:flex;align-items:center;gap:.85rem}
+  .foot-id .m{width:30px;height:30px;color:var(--velocity);flex-shrink:0}
+  .foot-id .t{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--steel)}
+  .foot-meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint-ink)}
+
+  /* ===================== MOTION ===================== */
+  /* Hidden states are gated on the .js flag so a no-JS load is never blank.
+     A JS "finalize" pass guarantees the settled state even where the
+     compositor doesn't advance CSS time. */
+  .reveal,.anim{transition:opacity .9s var(--ease),transform .9s var(--ease)}
+
+  /* scroll reveal */
+  html.js .reveal{opacity:0;transform:translateY(26px)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* hero orchestrated load */
+  html.js.preload .anim{opacity:0}
+  html.js.preload .a-mark{transform:translateX(-26px)}
+  html.js.preload .a-h1{transform:translateY(40px)}
+  html.js.preload .a-tag,html.js.preload .a-lead,html.js.preload .a-bl,html.js.preload .a-br{transform:translateY(16px)}
+  .a-tag{transition-delay:.2s}
+  .a-h1{transition-delay:.3s}
+  .a-lead{transition-delay:.55s}
+  .a-bl{transition-delay:.75s}
+  .a-br{transition-delay:.85s}
+
+  @media (prefers-reduced-motion:reduce){
+    .anim,.reveal{opacity:1!important;transform:none!important;transition:none!important}
+  }
+
+  @media (max-width:680px){
+    .hero-mark{width:54px;height:54px}
+    .hero-tag{font-size:.62rem;letter-spacing:.18em}
+    .hero-bottom{font-size:.6rem;letter-spacing:.16em}
+    .identity{min-height:64svh}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" data-screen-label="Hero">
+  <div class="hero-top">
+    <div class="hero-mark anim a-mark" role="img" aria-label="Velocity Ventures Vietnam">
+      <svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" aria-hidden="true" style="display:block;overflow:visible">
+        <path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M37 36 L60 62 L83 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+      </svg>
+    </div>
+    <div class="hero-tag anim a-tag">EST. 2019 &middot; <span class="red">IN STEALTH</span></div>
+  </div>
+
+  <div class="hero-center">
+    <h1 class="anim a-h1">Build at<br><span class="accent">velocity.</span></h1>
+    <p class="hlead anim a-lead">Backing and building the next generation of AI companies — from Vietnam.</p>
+  </div>
+
+  <div class="hero-bottom">
+    <span class="anim a-bl">Velocity Ventures Vietnam</span>
+    <span class="anim a-br"><span class="red">velocityvv.com</span></span>
+  </div>
+</section>
+
+<!-- ============================== 01 THESIS ============================== -->
+<section class="thesis" data-screen-label="Thesis">
+  <div class="eyebrow reveal">01 / The Next Wave</div>
+  <h2 class="statement reveal">In 2019, we bet Vietnam was at a tipping point. We were right.<br><span class="soft">AI is the next one.</span></h2>
+  <p class="body reveal">We back and build at the frontier of AI in Vietnam — across applications and the infrastructure beneath them. Quietly, for now.</p>
+</section>
+
+<!-- ============================== 02 PORTFOLIO ============================== -->
+<section class="portfolio" data-screen-label="Portfolio">
+  <div class="eyebrow reveal">02 / Portfolio</div>
+  <h2 class="pf-lead reveal">A track record, not a pitch.</h2>
+
+  <div class="kam-card reveal">
+    <div class="kam-head">
+      <span class="kam-logo"><img src="assets/kamereo-icon.png" alt="Kamereo logo" width="60" height="60"></span>
+      <div class="kam-wordmark">Kamereo<span class="dot accent">.</span></div>
+    </div>
+    <p class="kam-desc">Vietnam's largest B2B food supply platform.</p>
+    <div class="chips">
+      <span class="chip">Backed <span class="red">2018</span></span>
+      <span class="chip"><span class="red">$15M+</span> Raised</span>
+      <span class="chip">Series B</span>
+    </div>
+    <div class="kam-caption">Sumitomo &middot; SMBC &middot; Mitsubishi UFJ Capital</div>
+  </div>
+
+  <div class="pf-foot reveal">More in the garage.</div>
+</section>
+
+<!-- ============================== 03 WHAT WE ARE ============================== -->
+<section class="identity" data-screen-label="Identity">
+  <h2 class="statement reveal">A solo builder-investor.<br><span class="soft">We don't just write the check — </span>we build.</h2>
+  <div class="sub reveal">
+    <span>AI Applications</span><i>·</i><span>AI Infrastructure</span><i>·</i><span>Vietnam</span>
+  </div>
+</section>
+
+<!-- ============================== 04 CONTACT / FOOTER ============================== -->
+<section class="contact" data-screen-label="Contact">
+  <h2 class="ask reveal">Building at the AI&nbsp;&times;&nbsp;Vietnam frontier? Or want to build with us?</h2>
+  <a class="mail reveal" href="mailto:duc@velocityvv.com">duc@velocityvv.com</a>
+
+  <div class="foot-row reveal">
+    <div class="foot-id">
+      <div class="m" aria-hidden="true">
+        <svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" style="display:block;overflow:visible">
+          <path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M37 36 L60 62 L83 36" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+        </svg>
+      </div>
+      <span class="t">Velocity Ventures Vietnam</span>
+    </div>
+    <div class="foot-meta">&copy; 2026 &middot; Private &amp; Confidential</div>
+  </div>
+</section>
+
+<script>
+  var html=document.documentElement;
+  // Force the settled state directly (used everywhere; guarantees visibility
+  // even where the compositor doesn't advance CSS transition time).
+  function finalize(el){ el.style.transition='none'; el.style.opacity='1'; el.style.transform='none'; }
+
+  // hero orchestrated load
+  function play(){
+    html.classList.remove('preload');
+    setTimeout(function(){ document.querySelectorAll('.anim').forEach(finalize); }, 1900);
+  }
+  if(document.readyState==='complete'){ setTimeout(play, 40); }
+  else { window.addEventListener('load',function(){ setTimeout(play, 40); }); }
+
+  // scroll fade-up
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var el=e.target; el.classList.add('in'); io.unobserve(el);
+        setTimeout(function(){ finalize(el); }, 1000);
+      }
+    });
+  },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

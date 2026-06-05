@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocity Ventures Vietnam — Product Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     VVV PRODUCT DESIGN SYSTEM — semantic token layer
+     Dark is the brand default; .light swaps the semantic layer.
+     ============================================================ */
+  :root{
+    /* —— raw brand palette (never use directly in product) —— */
+    --carbon:#08080a; --graphite:#16161a; --graphite-2:#101013;
+    --steel:#8f8f97; --bone:#f4f2ec; --velocity:#ff2b2b; --redline:#c40d0d;
+
+    /* —— type —— */
+    --font-sans:'Be Vietnam Pro',system-ui,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --fs-xs:.75rem; --fs-sm:.875rem; --fs-base:1rem; --fs-lg:1.125rem;
+    --fs-xl:1.5rem; --fs-2xl:2rem; --fs-3xl:2.75rem; --fs-display:4rem;
+
+    /* —— spacing (4px base) —— */
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
+
+    /* —— radius —— */
+    --r-sm:3px; --r-md:6px; --r-lg:10px; --r-full:999px;
+
+    /* —— motion —— */
+    --ease:cubic-bezier(.2,.7,.2,1);
+    --dur-fast:150ms; --dur:250ms; --dur-slow:400ms;
+
+    /* —— semantic: DARK (default) —— */
+    --bg:#08080a; --surface:#16161a; --surface-2:#1d1d22; --surface-3:#101013;
+    --border:rgba(255,255,255,.12); --border-strong:rgba(255,255,255,.22);
+    --text:#f4f2ec; --text-muted:#8f8f97; --text-faint:#55555c;
+    --accent:#ff2b2b; --accent-hover:#ff4848; --accent-press:#c40d0d; --accent-soft:rgba(255,43,43,.12); --on-accent:#fff;
+    --success:#39d98a; --success-soft:rgba(57,217,138,.12);
+    --warning:#f5a623; --warning-soft:rgba(245,166,35,.12);
+    --info:#3aa3ff; --info-soft:rgba(58,163,255,.12);
+    --el-1:0 1px 2px rgba(0,0,0,.4);
+    --el-2:0 6px 20px rgba(0,0,0,.45);
+    --el-3:0 18px 50px rgba(0,0,0,.55);
+    --focus:0 0 0 3px rgba(255,43,43,.4);
+  }
+  body.light{
+    --bg:#f7f6f3; --surface:#ffffff; --surface-2:#efedea; --surface-3:#e7e5e0;
+    --border:rgba(8,8,10,.12); --border-strong:rgba(8,8,10,.24);
+    --text:#08080a; --text-muted:#6a6a72; --text-faint:#a4a4ac;
+    --accent:#e01010; --accent-hover:#c40d0d; --accent-press:#a00a0a; --accent-soft:rgba(224,16,16,.08); --on-accent:#fff;
+    --el-1:0 1px 2px rgba(8,8,10,.08);
+    --el-2:0 6px 20px rgba(8,8,10,.1);
+    --el-3:0 18px 50px rgba(8,8,10,.16);
+    --focus:0 0 0 3px rgba(224,16,16,.3);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;line-height:1.5;transition:background var(--dur),color var(--dur)}
+  a{color:inherit}
+  ::selection{background:var(--accent);color:#fff}
+
+  /* ============ LAYOUT ============ */
+  .shell{display:grid;grid-template-columns:272px 1fr;min-height:100vh}
+  .nav{position:sticky;top:0;height:100vh;border-right:1px solid var(--border);padding:1.8rem 1.5rem;display:flex;flex-direction:column;background:var(--surface-3);overflow-y:auto}
+  .nav .brand{display:flex;align-items:center;gap:.8rem;margin-bottom:.3rem}
+  .nav .brand .m{width:32px;height:32px;color:var(--accent)}
+  .nav .brand .wm{font-weight:900;font-size:1rem;letter-spacing:-.02em;line-height:.95}
+  .nav .brand .wm span{display:block;font-family:var(--font-mono);font-weight:500;font-size:.54rem;letter-spacing:.24em;color:var(--text-muted);text-transform:uppercase;margin-top:.3rem}
+  .nav .grp{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint);margin:1.5rem 0 .7rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+  .nav ul{list-style:none}
+  .nav li a{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text-muted);font-size:.87rem;padding:.42rem .6rem;border-radius:var(--r-sm);transition:color var(--dur-fast),background var(--dur-fast);font-weight:500}
+  .nav li a::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity var(--dur-fast),transform var(--dur-fast)}
+  .nav li a:hover{color:var(--text);background:var(--accent-soft)}
+  .nav li a.active{color:var(--text);background:var(--accent-soft);font-weight:600}
+  .nav li a.active::before{opacity:1;transform:scale(1)}
+  .themebar{margin-top:auto;padding-top:1.4rem;display:flex;gap:.5rem}
+  .themebar button{flex:1;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem;border-radius:var(--r-sm);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all var(--dur-fast)}
+  .themebar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  main{min-width:0}
+  section{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4.5rem);border-bottom:1px solid var(--border);max-width:1240px}
+  .eyebrow{font-family:var(--font-mono);font-size:.66rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.8rem;margin-bottom:1.1rem}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+  .eyebrow .dim{color:var(--text-muted)}
+  h2.sec{font-weight:900;letter-spacing:-.03em;line-height:1;font-size:clamp(1.9rem,4vw,3rem)}
+  .accent{color:var(--accent)}
+  .seclead{color:var(--text-muted);font-size:1.05rem;line-height:1.55;max-width:60ch;margin-top:1rem}
+  .subhead{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:2.6rem 0 1.1rem;display:flex;align-items:center;gap:.6rem}
+  .subhead .n{color:var(--text-faint)}
+  .note{color:var(--text-muted);font-size:.92rem;line-height:1.55;max-width:62ch;margin-top:1rem}
+  .note code,code.inline{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);padding:.1em .4em;border-radius:3px;color:var(--accent)}
+
+  /* ============ HERO ============ */
+  .hero{min-height:62vh;display:flex;flex-direction:column;justify-content:center;gap:1.4rem;padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4.5rem);position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;top:0;right:0;width:42%;height:100%;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(115deg,transparent 0 38px,var(--accent-soft) 38px 40px);
+    -webkit-mask-image:linear-gradient(115deg,transparent 35%,#000 100%);mask-image:linear-gradient(115deg,transparent 35%,#000 100%)}
+  .hero > *{position:relative;z-index:1}
+  .hero h1{font-weight:900;letter-spacing:-.035em;line-height:.92;font-size:clamp(2.6rem,7vw,5.5rem)}
+  .hero p{color:var(--text-muted);font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:54ch;line-height:1.5}
+  .hero .meta{display:flex;gap:1.4rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-top:.6rem}
+  .hero .meta b{color:var(--accent)}
+
+  /* ============ TOKEN TABLES & SWATCHES ============ */
+  .tok-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem;margin-top:.4rem}
+  .tok{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:var(--surface);cursor:pointer;transition:border-color var(--dur-fast),transform var(--dur-fast)}
+  .tok:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .tok .fill{height:64px}
+  .tok .body{padding:.7rem .85rem}
+  .tok .nm{font-weight:700;font-size:.88rem}
+  .tok .var{font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);margin-top:.25rem}
+  .tok .hex{font-family:var(--font-mono);font-size:.62rem;color:var(--text-faint);margin-top:.15rem;text-transform:uppercase}
+
+  .scaletbl{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-top:.4rem}
+  .scaletbl .row{display:grid;grid-template-columns:120px 90px 1fr;gap:1rem;align-items:baseline;padding:.85rem 1.2rem;border-top:1px solid var(--border)}
+  .scaletbl .row:first-child{border-top:none}
+  .scaletbl .row .tk{font-family:var(--font-mono);font-size:.72rem;color:var(--accent)}
+  .scaletbl .row .px{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted)}
+  .scaletbl .row .demo{color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* spacing visual */
+  .spacing{display:flex;flex-direction:column;gap:.6rem;margin-top:.4rem}
+  .sprow{display:flex;align-items:center;gap:1rem}
+  .sprow .lbl{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);width:130px;flex-shrink:0}
+  .sprow .bar{height:18px;background:var(--accent);border-radius:2px}
+
+  .radius-row,.shadow-row{display:flex;gap:1rem;margin-top:.4rem;flex-wrap:wrap}
+  .rad{flex:1;min-width:120px;text-align:center}
+  .rad .box{height:80px;background:var(--surface-2);border:1px solid var(--border)}
+  .rad .lbl{font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);margin-top:.6rem}
+  .shd{flex:1;min-width:140px;text-align:center}
+  .shd .box{height:80px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md)}
+  .shd .lbl{font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);margin-top:1rem}
+
+  .motion-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.4rem}
+  .mo{border:1px solid var(--border);border-radius:var(--r-md);padding:1.2rem;background:var(--surface);overflow:hidden}
+  .mo .tk{font-family:var(--font-mono);font-size:.7rem;color:var(--accent)}
+  .mo .v{font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);margin-top:.3rem}
+  .mo .track{height:8px;background:var(--surface-2);border-radius:var(--r-full);margin-top:1rem;position:relative;overflow:hidden}
+  .mo .dot{position:absolute;top:-3px;left:0;width:14px;height:14px;border-radius:50%;background:var(--accent)}
+
+  /* ============ COMPONENT DEMO FRAME ============ */
+  .demo-block{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-top:.4rem;background:var(--surface)}
+  .demo-stage{padding:clamp(1.5rem,4vw,2.6rem);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;background:var(--bg);background-image:radial-gradient(var(--border) .5px,transparent .5px);background-size:18px 18px}
+  .demo-stage.col{flex-direction:column;align-items:stretch}
+  .code-head{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;border-top:1px solid var(--border);background:var(--surface-3)}
+  .code-head .fn{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;color:var(--text-muted)}
+  .code-head .copybtn{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .7rem;border-radius:var(--r-sm);border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all var(--dur-fast)}
+  .code-head .copybtn:hover{border-color:var(--accent);color:var(--accent)}
+  pre.code{margin:0;padding:1.1rem 1.2rem;overflow-x:auto;font-family:var(--font-mono);font-size:.76rem;line-height:1.7;color:var(--text);background:var(--surface-3);border-top:1px solid var(--border);display:none}
+  pre.code.show{display:block}
+  pre.code .tag{color:var(--accent)}
+  pre.code .at{color:#7fc7ff}
+  pre.code .st{color:#9fe6b8}
+  pre.code .c{color:var(--text-faint)}
+  body.light pre.code .at{color:#1668c4}
+  body.light pre.code .st{color:#1f8a4c}
+
+  /* ============ BUTTONS ============ */
+  .btn{font-family:var(--font-sans);font-size:.9rem;font-weight:600;padding:.65rem 1.2rem;border-radius:var(--r-md);border:1px solid transparent;cursor:pointer;transition:all var(--dur-fast);display:inline-flex;align-items:center;gap:.5rem;line-height:1}
+  .btn:focus-visible{outline:none;box-shadow:var(--focus)}
+  .btn-primary{background:var(--accent);color:var(--on-accent)}
+  .btn-primary:hover{background:var(--accent-hover)}
+  .btn-primary:active{background:var(--accent-press)}
+  .btn-secondary{background:var(--surface-2);color:var(--text);border-color:var(--border)}
+  .btn-secondary:hover{border-color:var(--border-strong)}
+  .btn-ghost{background:transparent;color:var(--text-muted)}
+  .btn-ghost:hover{background:var(--accent-soft);color:var(--accent)}
+  .btn-mono{background:transparent;color:var(--accent);border-color:var(--border);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+  .btn-mono:hover{border-color:var(--accent)}
+  .btn[disabled]{opacity:.4;cursor:not-allowed}
+  .btn-sm{padding:.45rem .85rem;font-size:.8rem}
+  .btn-lg{padding:.85rem 1.6rem;font-size:1rem}
+
+  /* ============ FORMS ============ */
+  .field{display:flex;flex-direction:column;gap:.4rem;max-width:340px;width:100%}
+  .field label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+  .input,.select,.textarea{font-family:var(--font-sans);font-size:.92rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);padding:.7rem .9rem;color:var(--text);transition:border-color var(--dur-fast),box-shadow var(--dur-fast);width:100%}
+  .input::placeholder{color:var(--text-faint)}
+  .input:focus,.select:focus,.textarea:focus{outline:none;border-color:var(--accent);box-shadow:var(--focus)}
+  .input.err{border-color:var(--accent)}
+  .field .help{font-size:.78rem;color:var(--text-faint)}
+  .field .help.err{color:var(--accent)}
+  .check{display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.9rem}
+  .check input{width:18px;height:18px;accent-color:var(--accent)}
+  .toggle{position:relative;width:42px;height:24px;border-radius:var(--r-full);background:var(--surface-2);border:1px solid var(--border);cursor:pointer;transition:background var(--dur-fast)}
+  .toggle.on{background:var(--accent);border-color:var(--accent)}
+  .toggle .knob{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform var(--dur)}
+  .toggle.on .knob{transform:translateX(18px)}
+
+  /* ============ CARDS ============ */
+  .cardrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;width:100%}
+  .ui-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.4rem;box-shadow:var(--el-1)}
+  .ui-card.accent{border-color:var(--accent);box-shadow:var(--el-1),inset 0 0 0 1px var(--accent)}
+  .ui-card.accent .ct{display:flex;align-items:center;gap:.45rem}
+  .ui-card.accent .ct::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .ui-card .ct{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+  .ui-card h4{font-size:1.05rem;font-weight:800;margin:.6rem 0 .4rem;letter-spacing:-.01em}
+  .ui-card p{color:var(--text-muted);font-size:.88rem;line-height:1.5}
+  .ui-card .num{font-size:2.2rem;font-weight:900;letter-spacing:-.03em;margin-top:.2rem}
+  .ui-card .num span{color:var(--accent)}
+
+  /* ============ NAV / TABS ============ */
+  .topbar{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:.7rem 1.1rem}
+  .topbar .lft{display:flex;align-items:center;gap:1.4rem}
+  .topbar .m{width:24px;height:24px;color:var(--accent)}
+  .topbar .navlinks{display:flex;gap:1.2rem;font-size:.85rem}
+  .topbar .navlinks a{text-decoration:none;color:var(--text-muted);transition:color var(--dur-fast)}
+  .topbar .navlinks a.active,.topbar .navlinks a:hover{color:var(--text)}
+  .tabs{display:flex;gap:.2rem;border-bottom:1px solid var(--border);width:100%}
+  .tabs button{font-family:var(--font-sans);font-size:.88rem;font-weight:600;background:none;border:none;color:var(--text-muted);padding:.7rem 1rem;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color var(--dur-fast),border-color var(--dur-fast)}
+  .tabs button.on{color:var(--text);border-bottom-color:var(--accent)}
+
+  /* ============ BADGES ============ */
+  .badge{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:.3rem .6rem;border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:.35rem}
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .badge.accent{background:var(--accent-soft);color:var(--accent)}
+  .badge.success{background:var(--success-soft);color:var(--success)}
+  .badge.warning{background:var(--warning-soft);color:var(--warning)}
+  .badge.info{background:var(--info-soft);color:var(--info)}
+  .badge.neutral{background:var(--surface-2);color:var(--text-muted)}
+  .pill{font-size:.8rem;padding:.4rem .85rem;border-radius:var(--r-full);background:var(--surface-2);border:1px solid var(--border);color:var(--text);display:inline-flex;align-items:center;gap:.5rem}
+  .pill .x{color:var(--text-faint);cursor:pointer}
+
+  /* ============ TABLE ============ */
+  .dtable{width:100%;border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;font-size:.88rem}
+  .dtable .th,.dtable .tr{display:grid;grid-template-columns:2fr 1.4fr 1fr 1fr;gap:1rem;padding:.8rem 1.1rem;align-items:center}
+  .dtable .th{background:var(--surface-3);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
+  .dtable .tr{border-top:1px solid var(--border);transition:background var(--dur-fast)}
+  .dtable .tr:hover{background:var(--accent-soft)}
+  .dtable .co{display:flex;align-items:center;gap:.6rem;font-weight:600}
+  .dtable .co .m{width:18px;height:18px;color:var(--accent)}
+  .dtable .mono{font-family:var(--font-mono);font-size:.8rem;color:var(--text-muted)}
+
+  /* ============ MODAL / TOAST ============ */
+  .modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity var(--dur)}
+  .modal-mask.open{opacity:1;pointer-events:auto}
+  .modal{background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--r-lg);max-width:420px;width:90%;padding:1.8rem;box-shadow:var(--el-3);transform:translateY(14px) scale(.98);transition:transform var(--dur) var(--ease)}
+  .modal-mask.open .modal{transform:none}
+  .modal h3{font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
+  .modal p{color:var(--text-muted);font-size:.92rem;line-height:1.55;margin-top:.7rem}
+  .modal .acts{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1.6rem}
+  .ds-toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:310;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:.9rem 1.2rem;box-shadow:var(--el-2);transform:translateX(140%);transition:transform var(--dur) var(--ease);display:flex;align-items:center;gap:.8rem;font-size:.9rem}
+  .ds-toast.show{transform:none}
+  .ds-toast .dot{width:8px;height:8px;border-radius:50%;background:var(--success)}
+
+  /* ============ STATES ============ */
+  .states-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;width:100%}
+  .state-box{border:1px dashed var(--border-strong);border-radius:var(--r-lg);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;text-align:center;min-height:180px;background:var(--surface)}
+  .state-box .m{width:40px;height:40px;color:var(--text-faint)}
+  .state-box h4{font-size:1rem;font-weight:700}
+  .state-box p{color:var(--text-muted);font-size:.84rem;max-width:30ch}
+  .skel{width:100%}
+  .skel .line{height:12px;border-radius:var(--r-full);background:linear-gradient(90deg,var(--surface-2) 25%,var(--surface-3) 37%,var(--surface-2) 63%);background-size:400% 100%;animation:shimmer 1.4s linear infinite;margin-bottom:.7rem}
+  @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .spinner{width:34px;height:34px;border:3px solid var(--surface-2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ============ MISC ============ */
+  .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(160%);z-index:400;background:var(--text);color:var(--bg);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.3rem;border-radius:5px;transition:transform var(--dur) var(--ease);font-weight:600}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  footer{padding:3rem clamp(1.5rem,5vw,4.5rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  footer .who{font-weight:700}
+  footer .who span{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;color:var(--text-muted);text-transform:uppercase;margin-top:.4rem}
+  footer .pagelink{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:.7rem 1rem;border-radius:5px;transition:all var(--dur-fast)}
+  footer .pagelink:hover{border-color:var(--accent);color:var(--accent)}
+
+  .navtoggle{display:none}
+  @media (max-width:980px){
+    .shell{grid-template-columns:1fr}
+    .nav{position:fixed;z-index:200;width:272px;transform:translateX(-100%);transition:transform var(--dur) var(--ease)}
+    .nav.open{transform:translateX(0)}
+    .navtoggle{display:flex;position:fixed;top:1rem;left:1rem;z-index:210;background:var(--surface);border:1px solid var(--border);color:var(--text);width:44px;height:44px;border-radius:6px;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem}
+    .states-row,.motion-row{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body class="light">
+
+<button class="navtoggle" id="navtoggle" aria-label="Menu">☰</button>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="nav" id="nav">
+    <div class="brand">
+      <div class="m" data-mark></div>
+      <div class="wm">VVV<span>Design System</span></div>
+    </div>
+    <div class="grp">Foundations</div>
+    <ul>
+      <li><a href="#colors">Color tokens</a></li>
+      <li><a href="#type">Typography</a></li>
+      <li><a href="#spacing">Spacing &amp; layout</a></li>
+      <li><a href="#radius">Radius &amp; elevation</a></li>
+      <li><a href="#motion">Motion</a></li>
+    </ul>
+    <div class="grp">Components</div>
+    <ul>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#forms">Forms &amp; inputs</a></li>
+      <li><a href="#cards">Cards &amp; surfaces</a></li>
+      <li><a href="#navigation">Navigation &amp; tabs</a></li>
+      <li><a href="#badges">Badges &amp; pills</a></li>
+      <li><a href="#table">Data table</a></li>
+      <li><a href="#overlays">Modals &amp; toasts</a></li>
+      <li><a href="#states">Empty &amp; loading</a></li>
+    </ul>
+    <div class="themebar">
+      <button id="t-dark">Dark</button>
+      <button id="t-light" class="on">Light</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="eyebrow">Velocity Ventures Vietnam <span class="dim">/ Product Design System</span></div>
+      <h1>Build the product<br>at <span class="accent">velocity.</span></h1>
+      <p>The engineering-facing system: semantic tokens, components, states, and copy-paste code — for velocityvv.com and everything VVV ships next. Built on the brand, tuned for screens.</p>
+      <div class="meta"><span>Version <b>1.0</b></span><span>Dark + light</span><span>Click any token to copy</span><span><b>Be Vietnam Pro</b> / JetBrains Mono</span></div>
+    </section>
+
+    <!-- COLORS -->
+    <section id="colors">
+      <div class="eyebrow">F·01 <span class="dim">/ Color Tokens</span></div>
+      <h2 class="sec">Semantic <span class="accent">over raw.</span></h2>
+      <p class="seclead">Build with semantic tokens (<code class="inline">--bg</code>, <code class="inline">--surface</code>, <code class="inline">--accent</code>) — never raw hex. The semantic layer remaps automatically between dark and light. Click any token to copy its variable.</p>
+
+      <div class="subhead"><span class="n">F·01.1</span> Surfaces &amp; text</div>
+      <div class="tok-grid" id="tok-surface"></div>
+
+      <div class="subhead"><span class="n">F·01.2</span> Accent &amp; status</div>
+      <div class="tok-grid" id="tok-accent"></div>
+
+      <p class="note">The brand's discipline rule carries into product: <code>--accent</code> is reserved for the single most important action or value in a view. Status colors (<code>success</code>, <code>warning</code>, <code>info</code>) are functional only — never decorative.</p>
+    </section>
+
+    <!-- TYPE -->
+    <section id="type">
+      <div class="eyebrow">F·02 <span class="dim">/ Typography</span></div>
+      <h2 class="sec">One scale, <span class="accent">two families.</span></h2>
+      <p class="seclead">Be Vietnam Pro for everything readable — drawn with full Vietnamese diacritics; JetBrains Mono for labels, data, code, and metadata. The scale is fixed — pick a token, don't invent a size.</p>
+      <div class="scaletbl" id="typescale"></div>
+      <div class="note" style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:1.1rem 1.3rem">
+        <span style="font-size:1.6rem;font-weight:800;letter-spacing:-.02em">Xây dựng với tốc độ Việt Nam</span>
+        <span style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)">Vietnamese · ăâđêôơư · áảạệố</span>
+      </div>
+      <p class="note">Mono is always uppercased with <code>+0.14em</code>–<code>0.2em</code> tracking for labels. Body line-height is <code>1.5</code>; display drops to <code>0.92</code>–<code>1.0</code> with <code>-0.03em</code> tracking.</p>
+    </section>
+
+    <!-- SPACING -->
+    <section id="spacing">
+      <div class="eyebrow">F·03 <span class="dim">/ Spacing &amp; Layout</span></div>
+      <h2 class="sec">A <span class="accent">4px</span> base.</h2>
+      <p class="seclead">Every gap, pad, and margin is a multiple of 4. Use the spacing tokens; the grid is 12-column with a 1240px max content width.</p>
+      <div class="spacing" id="spacescale"></div>
+    </section>
+
+    <!-- RADIUS + ELEVATION -->
+    <section id="radius">
+      <div class="eyebrow">F·04 <span class="dim">/ Radius &amp; Elevation</span></div>
+      <h2 class="sec">Tight corners, <span class="accent">low light.</span></h2>
+      <p class="seclead">Corners stay small — the brand reads precise, not soft. Elevation is restrained: shadows separate layers, they don't decorate.</p>
+      <div class="subhead"><span class="n">F·04.1</span> Radius</div>
+      <div class="radius-row">
+        <div class="rad"><div class="box" style="border-radius:var(--r-sm)"></div><div class="lbl">--r-sm · 3px</div></div>
+        <div class="rad"><div class="box" style="border-radius:var(--r-md)"></div><div class="lbl">--r-md · 6px</div></div>
+        <div class="rad"><div class="box" style="border-radius:var(--r-lg)"></div><div class="lbl">--r-lg · 10px</div></div>
+        <div class="rad"><div class="box" style="border-radius:var(--r-full)"></div><div class="lbl">--r-full · pill</div></div>
+      </div>
+      <div class="subhead"><span class="n">F·04.2</span> Elevation</div>
+      <div class="shadow-row">
+        <div class="shd"><div class="box" style="box-shadow:var(--el-1)"></div><div class="lbl">--el-1 · cards</div></div>
+        <div class="shd"><div class="box" style="box-shadow:var(--el-2)"></div><div class="lbl">--el-2 · popovers</div></div>
+        <div class="shd"><div class="box" style="box-shadow:var(--el-3)"></div><div class="lbl">--el-3 · modals</div></div>
+      </div>
+    </section>
+
+    <!-- MOTION -->
+    <section id="motion">
+      <div class="eyebrow">F·05 <span class="dim">/ Motion</span></div>
+      <h2 class="sec">Fast in, <span class="accent">settled.</span></h2>
+      <p class="seclead">One easing curve across the system — <code class="inline">cubic-bezier(.2,.7,.2,1)</code>. Quick entrance, gentle settle. Never bouncy. Hover the cards to feel each duration.</p>
+      <div class="motion-row" id="motionrow"></div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section id="buttons">
+      <div class="eyebrow">C·01 <span class="dim">/ Buttons</span></div>
+      <h2 class="sec">Action, <span class="accent">ranked.</span></h2>
+      <p class="seclead">One primary per view. Secondary and ghost carry the rest. Mono buttons echo the telemetry voice for utility actions.</p>
+      <div class="demo-block">
+        <div class="demo-stage">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-mono">Telemetry</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+        </div>
+        <div class="demo-stage" style="border-top:1px solid var(--border)">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+        </div>
+        <div class="code-head"><span class="fn">buttons.html</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="tag">&lt;button</span> <span class="at">class</span>=<span class="st">"btn btn-primary"</span><span class="tag">&gt;</span>Primary<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="at">class</span>=<span class="st">"btn btn-secondary"</span><span class="tag">&gt;</span>Secondary<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="at">class</span>=<span class="st">"btn btn-ghost"</span><span class="tag">&gt;</span>Ghost<span class="tag">&lt;/button&gt;</span>
+<span class="c">&lt;!-- sizes: .btn-sm / .btn-lg --&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section id="forms">
+      <div class="eyebrow">C·02 <span class="dim">/ Forms &amp; Inputs</span></div>
+      <h2 class="sec">Clear, <span class="accent">focused.</span></h2>
+      <p class="seclead">Mono labels, generous targets (44px min), and a red focus ring. Validation speaks plainly. Try focusing a field or the email validation below.</p>
+      <div class="demo-block">
+        <div class="demo-stage col">
+          <div class="field">
+            <label>Company name</label>
+            <input class="input" placeholder="e.g. Kamereo" type="text">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input class="input" id="emailField" placeholder="you@company.com" type="email">
+            <span class="help" id="emailHelp">We'll never share it.</span>
+          </div>
+          <div class="field">
+            <label>Stage</label>
+            <select class="select"><option>Pre-seed</option><option>Seed</option><option>Series A</option><option>Series B+</option></select>
+          </div>
+          <div style="display:flex;gap:1.4rem;align-items:center;flex-wrap:wrap">
+            <label class="check"><input type="checkbox" checked> AI-native</label>
+            <label class="check"><input type="checkbox"> Vietnam-based</label>
+            <div style="display:flex;align-items:center;gap:.6rem"><span style="font-size:.85rem;color:var(--text-muted)">Notify me</span><div class="toggle on" data-toggle><div class="knob"></div></div></div>
+          </div>
+        </div>
+        <div class="code-head"><span class="fn">field.html</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"field"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label&gt;</span>Email<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="at">class</span>=<span class="st">"input"</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">placeholder</span>=<span class="st">"you@company.com"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"help"</span><span class="tag">&gt;</span>We'll never share it.<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section id="cards">
+      <div class="eyebrow">C·03 <span class="dim">/ Cards &amp; Surfaces</span></div>
+      <h2 class="sec">Layered <span class="accent">surfaces.</span></h2>
+      <p class="seclead">Cards sit on <code class="inline">--surface</code> with a hairline border and the lightest elevation. The accent stripe marks the one card that matters.</p>
+      <div class="demo-block">
+        <div class="demo-stage col">
+          <div class="cardrow">
+            <div class="ui-card accent">
+              <div class="ct">Portfolio</div>
+              <h4>Kamereo</h4>
+              <p>#1 B2B food platform in Vietnam. Backed at seed, 2018.</p>
+              <div class="num"><span>$15M+</span></div>
+            </div>
+            <div class="ui-card">
+              <div class="ct">Thesis</div>
+              <h4>AI × Vietnam</h4>
+              <p>AI applications, AI infrastructure, and a mobile-first market at a tipping point.</p>
+            </div>
+            <div class="ui-card">
+              <div class="ct">Model</div>
+              <h4>Builder-investor</h4>
+              <p>Ships 0→1 alongside founders. No committee, no process theatre.</p>
+            </div>
+          </div>
+        </div>
+        <div class="code-head"><span class="fn">card.html</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"ui-card accent"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"ct"</span><span class="tag">&gt;</span>Portfolio<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;h4&gt;</span>Kamereo<span class="tag">&lt;/h4&gt;</span>
+  <span class="tag">&lt;p&gt;</span>#1 B2B food platform in Vietnam.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"num"</span><span class="tag">&gt;&lt;span&gt;</span>$15M+<span class="tag">&lt;/span&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <section id="navigation">
+      <div class="eyebrow">C·04 <span class="dim">/ Navigation &amp; Tabs</span></div>
+      <h2 class="sec">Wayfinding, <span class="accent">quiet.</span></h2>
+      <p class="seclead">A top bar with the mark and minimal links; tabs with a single red underline for the active view. The active state is the only thing that gets color.</p>
+      <div class="demo-block">
+        <div class="demo-stage col">
+          <div class="topbar">
+            <div class="lft">
+              <div class="m" data-mark></div>
+              <div class="navlinks"><a class="active">Portfolio</a><a>Thesis</a><a>About</a></div>
+            </div>
+            <button class="btn btn-primary btn-sm">Get in touch</button>
+          </div>
+          <div class="tabs" id="demoTabs">
+            <button class="on">Overview</button>
+            <button>Companies</button>
+            <button>Activity</button>
+          </div>
+        </div>
+        <div class="code-head"><span class="fn">tabs.html</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"tabs"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;button</span> <span class="at">class</span>=<span class="st">"on"</span><span class="tag">&gt;</span>Overview<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;button&gt;</span>Companies<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;button&gt;</span>Activity<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section id="badges">
+      <div class="eyebrow">C·05 <span class="dim">/ Badges &amp; Pills</span></div>
+      <h2 class="sec">Status, <span class="accent">at a glance.</span></h2>
+      <p class="seclead">Mono badges for state; rounded pills for removable filters and tags.</p>
+      <div class="demo-block">
+        <div class="demo-stage">
+          <span class="badge accent">Lead</span>
+          <span class="badge success">Active</span>
+          <span class="badge warning">Diligence</span>
+          <span class="badge info">Watching</span>
+          <span class="badge neutral">Passed</span>
+        </div>
+        <div class="demo-stage" style="border-top:1px solid var(--border)">
+          <span class="pill">AI infra <span class="x">✕</span></span>
+          <span class="pill">Seed <span class="x">✕</span></span>
+          <span class="pill">Vietnam <span class="x">✕</span></span>
+        </div>
+        <div class="code-head"><span class="fn">badge.html</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"badge success"</span><span class="tag">&gt;</span>Active<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"badge warning"</span><span class="tag">&gt;</span>Diligence<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"pill"</span><span class="tag">&gt;</span>Seed <span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"x"</span><span class="tag">&gt;</span>✕<span class="tag">&lt;/span&gt;&lt;/span&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- TABLE -->
+    <section id="table">
+      <div class="eyebrow">C·06 <span class="dim">/ Data Table</span></div>
+      <h2 class="sec">Dense, <span class="accent">readable.</span></h2>
+      <p class="seclead">For the portfolio dashboard: mono for data, sans for names, a red-soft hover. Rows breathe at 4px multiples.</p>
+      <div class="demo-block">
+        <div class="demo-stage col">
+          <div class="dtable">
+            <div class="th"><span>Company</span><span>Stage</span><span>Raised</span><span>Status</span></div>
+            <div class="tr"><span class="co"><span class="m" data-mark></span>Kamereo</span><span class="mono">Series B</span><span class="mono">$15M+</span><span><span class="badge success">Active</span></span></div>
+            <div class="tr"><span class="co"><span class="m" data-mark></span>Stealth AI</span><span class="mono">Pre-seed</span><span class="mono">—</span><span><span class="badge warning">Diligence</span></span></div>
+            <div class="tr"><span class="co"><span class="m" data-mark></span>InfraCo</span><span class="mono">Seed</span><span class="mono">$2.1M</span><span><span class="badge info">Watching</span></span></div>
+          </div>
+        </div>
+        <div class="code-head"><span class="fn">table.html</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"dtable"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"th"</span><span class="tag">&gt;...&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="at">class</span>=<span class="st">"tr"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"co"</span><span class="tag">&gt;</span>Kamereo<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;span</span> <span class="at">class</span>=<span class="st">"mono"</span><span class="tag">&gt;</span>$15M+<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- OVERLAYS -->
+    <section id="overlays">
+      <div class="eyebrow">C·07 <span class="dim">/ Modals &amp; Toasts</span></div>
+      <h2 class="sec">Interrupt, <span class="accent">briefly.</span></h2>
+      <p class="seclead">Modals for decisions; toasts for confirmation. Both ride the system easing. Try them live.</p>
+      <div class="demo-block">
+        <div class="demo-stage">
+          <button class="btn btn-primary" id="openModal">Open modal</button>
+          <button class="btn btn-secondary" id="fireToast">Fire toast</button>
+        </div>
+        <div class="code-head"><span class="fn">overlay.js</span><button class="copybtn" data-copy-code>Copy</button></div>
+        <pre class="code" data-code><span class="c">// open / close by toggling .open on the mask</span>
+mask.classList.<span class="at">add</span>(<span class="st">'open'</span>);
+<span class="c">// toast auto-dismisses</span>
+toast.classList.<span class="at">add</span>(<span class="st">'show'</span>);
+setTimeout(() =&gt; toast.classList.<span class="at">remove</span>(<span class="st">'show'</span>), 2600);</pre>
+      </div>
+    </section>
+
+    <!-- STATES -->
+    <section id="states">
+      <div class="eyebrow">C·08 <span class="dim">/ Empty &amp; Loading</span></div>
+      <h2 class="sec">The <span class="accent">in-between.</span></h2>
+      <p class="seclead">Empty states point to the next action. Loading uses skeletons over spinners wherever layout is known.</p>
+      <div class="demo-block">
+        <div class="demo-stage col">
+          <div class="states-row">
+            <div class="state-box">
+              <div class="m" data-mark></div>
+              <h4>No companies yet</h4>
+              <p>Track your first deal to see it here.</p>
+              <button class="btn btn-primary btn-sm">Add company</button>
+            </div>
+            <div class="state-box">
+              <div class="skel">
+                <div class="line" style="width:60%"></div>
+                <div class="line" style="width:90%"></div>
+                <div class="line" style="width:75%"></div>
+                <div class="line" style="width:40%"></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem"><div class="spinner"></div><span style="color:var(--text-muted);font-size:.88rem">Loading portfolio…</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="who">VVV Product Design System<span>v1.0 · 2026 · duc@velocityvv.com</span></div>
+      <a class="pagelink" href="VVV Brand Guidelines.html">← Brand Guidelines</a>
+    </footer>
+  </main>
+</div>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <h3>Confirm pass</h3>
+    <p>Mark <b>Stealth AI</b> as passed? This moves it out of your active pipeline. You can restore it later.</p>
+    <div class="acts">
+      <button class="btn btn-ghost" id="cancelModal">Cancel</button>
+      <button class="btn btn-primary" id="confirmModal">Confirm pass</button>
+    </div>
+  </div>
+</div>
+<div class="ds-toast" id="dsToast"><span class="dot"></span> Saved to pipeline</div>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+/* ===== MARK ===== */
+const CHEV = `<svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" style="display:block;overflow:visible"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 36 L60 62 L83 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg>`;
+document.querySelectorAll('[data-mark]').forEach(el=>el.innerHTML=CHEV);
+
+/* ===== TOKEN SWATCHES ===== */
+const SURFACE_TOKENS=[
+  {nm:'Background',v:'--bg'},{nm:'Surface',v:'--surface'},{nm:'Surface 2',v:'--surface-2'},
+  {nm:'Border',v:'--border'},{nm:'Text',v:'--text'},{nm:'Text muted',v:'--text-muted'}
+];
+const ACCENT_TOKENS=[
+  {nm:'Accent',v:'--accent'},{nm:'Accent hover',v:'--accent-hover'},{nm:'Accent press',v:'--accent-press'},
+  {nm:'Success',v:'--success'},{nm:'Warning',v:'--warning'},{nm:'Info',v:'--info'}
+];
+function renderTokens(arr, id){
+  const wrap=document.getElementById(id); wrap.innerHTML='';
+  arr.forEach(t=>{
+    const el=document.createElement('div'); el.className='tok';
+    const cs=getComputedStyle(document.body).getPropertyValue(t.v).trim();
+    el.innerHTML=`<div class="fill" style="background:var(${t.v})"></div><div class="body"><div class="nm">${t.nm}</div><div class="var">var(${t.v})</div><div class="hex">${cs}</div></div>`;
+    el.addEventListener('click',()=>copy(`var(${t.v})`, `var(${t.v}) copied`));
+    wrap.appendChild(el);
+  });
+}
+/* ===== TYPE SCALE ===== */
+const TYPE=[
+  {tk:'--fs-display',px:'64px',cls:'',w:900,t:'Build at velocity'},
+  {tk:'--fs-3xl',px:'44px',w:900,t:'Same name, new machine'},
+  {tk:'--fs-2xl',px:'32px',w:800,t:'Portfolio overview'},
+  {tk:'--fs-xl',px:'24px',w:800,t:'Section heading'},
+  {tk:'--fs-lg',px:'18px',w:600,t:'Lead paragraph copy'},
+  {tk:'--fs-base',px:'16px',w:400,t:'Body — the default reading size for product UI.'},
+  {tk:'--fs-sm',px:'14px',w:400,t:'Secondary & helper text'},
+  {tk:'--fs-xs',px:'12px',w:500,t:'MONO LABEL / TELEMETRY',mono:true}
+];
+const tsWrap=document.getElementById('typescale');
+TYPE.forEach(t=>{
+  const r=document.createElement('div'); r.className='row';
+  r.innerHTML=`<span class="tk">${t.tk}</span><span class="px">${t.px}</span><span class="demo" style="font-size:var(${t.tk});font-weight:${t.w};${t.mono?'font-family:var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)':''}">${t.t}</span>`;
+  tsWrap.appendChild(r);
+});
+/* ===== SPACING ===== */
+const SPACE=[['--sp-1','4px'],['--sp-2','8px'],['--sp-3','12px'],['--sp-4','16px'],['--sp-5','24px'],['--sp-6','32px'],['--sp-7','48px'],['--sp-8','64px']];
+const spWrap=document.getElementById('spacescale');
+SPACE.forEach(([v,px])=>{
+  const r=document.createElement('div'); r.className='sprow';
+  r.innerHTML=`<span class="lbl">${v} · ${px}</span><div class="bar" style="width:${px}"></div>`;
+  spWrap.appendChild(r);
+});
+/* ===== MOTION ===== */
+const MOTION=[{tk:'--dur-fast',v:'150ms',d:150},{tk:'--dur',v:'250ms',d:250},{tk:'--dur-slow',v:'400ms',d:400}];
+const moWrap=document.getElementById('motionrow');
+MOTION.forEach(m=>{
+  const el=document.createElement('div'); el.className='mo';
+  el.innerHTML=`<div class="tk">${m.tk}</div><div class="v">${m.v} · ease</div><div class="track"><div class="dot"></div></div>`;
+  const dot=el.querySelector('.dot');
+  function run(){ dot.style.transition='none'; dot.style.left='0';
+    requestAnimationFrame(()=>{ dot.style.transition=`left ${m.d}ms cubic-bezier(.2,.7,.2,1)`; dot.style.left='calc(100% - 14px)'; });
+  }
+  el.addEventListener('mouseenter',run);
+  moWrap.appendChild(el); setTimeout(run,300+m.d);
+});
+
+/* ===== THEME TOGGLE ===== */
+const tDark=document.getElementById('t-dark'), tLight=document.getElementById('t-light');
+function setTheme(light){
+  document.body.classList.toggle('light',light);
+  tDark.classList.toggle('on',!light); tLight.classList.toggle('on',light);
+  localStorage.setItem('vvv-ds-theme',light?'light':'dark');
+  renderTokens(SURFACE_TOKENS,'tok-surface'); renderTokens(ACCENT_TOKENS,'tok-accent');
+}
+tDark.addEventListener('click',()=>setTheme(false));
+tLight.addEventListener('click',()=>setTheme(true));
+setTheme(localStorage.getItem('vvv-ds-theme')!=='dark');
+
+/* ===== INTERACTIONS ===== */
+// tabs
+document.getElementById('demoTabs').addEventListener('click',e=>{
+  if(e.target.tagName==='BUTTON'){ [...e.currentTarget.children].forEach(b=>b.classList.remove('on')); e.target.classList.add('on'); }
+});
+// toggle switches
+document.querySelectorAll('[data-toggle]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
+// email validation
+const emailField=document.getElementById('emailField'), emailHelp=document.getElementById('emailHelp');
+emailField.addEventListener('input',()=>{
+  const v=emailField.value;
+  if(v && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ emailField.classList.add('err'); emailHelp.classList.add('err'); emailHelp.textContent='Enter a valid email address.'; }
+  else { emailField.classList.remove('err'); emailHelp.classList.remove('err'); emailHelp.textContent="We'll never share it."; }
+});
+// modal
+const mask=document.getElementById('modalMask');
+document.getElementById('openModal').addEventListener('click',()=>mask.classList.add('open'));
+document.getElementById('cancelModal').addEventListener('click',()=>mask.classList.remove('open'));
+document.getElementById('confirmModal').addEventListener('click',()=>{ mask.classList.remove('open'); fireToast('Marked as passed'); });
+mask.addEventListener('click',e=>{ if(e.target===mask) mask.classList.remove('open'); });
+// toast
+const dsToast=document.getElementById('dsToast'); let dt;
+function fireToast(msg){ if(msg) dsToast.querySelector('.dot').nextSibling.textContent=' '+msg; dsToast.classList.add('show'); clearTimeout(dt); dt=setTimeout(()=>dsToast.classList.remove('show'),2600); }
+document.getElementById('fireToast').addEventListener('click',()=>fireToast('Saved to pipeline'));
+
+/* ===== CODE COPY + TOGGLE ===== */
+document.querySelectorAll('[data-copy-code]').forEach(btn=>{
+  const pre=btn.closest('.demo-block').querySelector('[data-code]');
+  btn.addEventListener('click',()=>copy(pre.textContent,'Code copied'));
+});
+// reveal code on header click
+document.querySelectorAll('.code-head').forEach(h=>{
+  h.addEventListener('click',e=>{ if(e.target.closest('[data-copy-code]'))return; h.nextElementSibling.classList.toggle('show'); });
+  h.style.cursor='pointer'; h.title='Click to view code';
+});
+
+/* ===== TOAST UTIL ===== */
+const toastEl=document.getElementById('toast'); let tt;
+function copy(text,msg){ navigator.clipboard?.writeText(text).then(()=>toast(msg)).catch(()=>toast('Copy failed')); }
+function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>toastEl.classList.remove('show'),1800); }
+
+/* ===== NAV ===== */
+const navLinks=[...document.querySelectorAll('.nav a[href^="#"]')];
+const secs=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy=new IntersectionObserver(es=>{es.forEach(en=>{ if(en.isIntersecting){ const id='#'+en.target.id; navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id)); } });},{rootMargin:'-25% 0px -65% 0px'});
+secs.forEach(s=>spy.observe(s));
+const nav=document.getElementById('nav'), toggle=document.getElementById('navtoggle');
+toggle.addEventListener('click',()=>nav.classList.toggle('open'));
+navLinks.forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+</script>
+</body>
+</html>

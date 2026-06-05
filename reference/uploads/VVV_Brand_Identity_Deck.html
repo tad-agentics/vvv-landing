@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocity Ventures Vietnam — Brand & Identity System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== COLOR TOKENS ===== */
+    --carbon:#08080a;      /* primary background */
+    --graphite:#16161a;    /* panels / cards */
+    --graphite-2:#101013;
+    --steel:#8f8f97;       /* muted text */
+    --bone:#f4f2ec;        /* primary ink */
+    --velocity:#ff2b2b;    /* primary accent */
+    --redline:#c40d0d;     /* deep / pressed */
+    --line:rgba(255,255,255,.12);
+    --faint:rgba(255,255,255,.07);
+    /* ===== TYPE ===== */
+    --mono:'Spline Sans Mono',ui-monospace,monospace;
+    --sans:'Archivo',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--carbon);color:var(--bone);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  .deck{position:relative;height:100vh;width:100vw}
+  .slide{position:absolute;inset:0;padding:clamp(2.2rem,5vw,5.2rem);display:flex;flex-direction:column;justify-content:center;
+    opacity:0;visibility:hidden;transform:scale(.99);transition:opacity .55s ease,transform .55s ease,visibility .55s;overflow:hidden}
+  .slide.active{opacity:1;visibility:visible;transform:scale(1)}
+  .slide::after{content:"";position:absolute;top:0;right:0;width:42%;height:100%;pointer-events:none;opacity:.5;z-index:0;
+    background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,255,255,.018) 38px 39px);
+    -webkit-mask-image:linear-gradient(115deg,transparent 30%,#000 100%);mask-image:linear-gradient(115deg,transparent 30%,#000 100%)}
+  .slide > *{position:relative;z-index:1}
+
+  .reveal{opacity:0;transform:translateY(22px)}
+  .slide.active .reveal{animation:rise .7s var(--ease) forwards}
+  .slide.active .reveal:nth-child(1){animation-delay:.06s}
+  .slide.active .reveal:nth-child(2){animation-delay:.14s}
+  .slide.active .reveal:nth-child(3){animation-delay:.22s}
+  .slide.active .reveal:nth-child(4){animation-delay:.30s}
+  .slide.active .reveal:nth-child(5){animation-delay:.38s}
+  .slide.active .reveal:nth-child(6){animation-delay:.46s}
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+  .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--velocity);display:flex;align-items:center;gap:.9rem;margin-bottom:1.5rem}
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--velocity)}
+  .eyebrow .dim{color:var(--steel)}
+  h1{font-weight:900;letter-spacing:-.03em;line-height:.94}
+  h2{font-weight:800;letter-spacing:-.025em;line-height:1.0;font-size:clamp(2rem,4.4vw,3.8rem)}
+  .lead{color:var(--steel);font-size:clamp(1rem,1.5vw,1.3rem);font-weight:400;line-height:1.5;max-width:42ch}
+  .accent{color:var(--velocity)}
+
+  /* ===== LOGO MARK ===== */
+  .mark{display:inline-block;color:var(--velocity)}
+  .mark svg{width:100%;height:100%;display:block;overflow:visible}
+  .echo path{opacity:0}
+  .slide.active .echo .e3{animation:streak .8s var(--ease) .2s forwards}
+  .slide.active .echo .e2{animation:streak .8s var(--ease) .32s forwards}
+  .slide.active .echo .e1{animation:streak .8s var(--ease) .44s forwards}
+  @keyframes streak{from{opacity:0;transform:translateY(-26px)}to{opacity:var(--o,1);transform:translateY(0)}}
+
+  /* ===== Slide 1 cover ===== */
+  #s1{justify-content:space-between}
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .cover-mark{width:96px;height:96px}
+  .cover-main h1{font-size:clamp(3rem,10.5vw,9rem)}
+  .cover-main .lead{margin-top:1.5rem;font-size:clamp(1.05rem,1.8vw,1.45rem);max-width:46ch;color:#c9c7c1}
+  .cover-bottom{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--steel)}
+  .cover-bottom .red{color:var(--velocity)}
+  .wordmark{font-family:var(--mono);font-weight:600;letter-spacing:.34em;font-size:.78rem;text-transform:uppercase}
+
+  .chips{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+  .chip{border:1px solid var(--line);border-radius:2px;padding:1.1rem 1.3rem;min-width:200px;flex:1}
+  .chip .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--velocity);margin-bottom:.5rem}
+  .chip .v{font-size:1.02rem;font-weight:600;line-height:1.25}
+
+  /* repositioning */
+  .reposition{margin-top:2rem;border-top:1px solid var(--line)}
+  .rrow{display:grid;grid-template-columns:1.1fr 1.4fr 1.6fr;border-bottom:1px solid var(--faint);padding:.95rem 0;align-items:baseline;gap:1rem}
+  .rrow .rk{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+  .rrow .old{color:#9a9a9f;font-size:1rem}
+  .rrow .new{color:var(--bone);font-size:1.04rem;font-weight:600}
+  .rrow .new b{color:var(--velocity);font-weight:700}
+  .rhead .rk,.rhead .old,.rhead .new{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);font-weight:500}
+  .rhead .new{color:var(--velocity)}
+
+  .pull{font-weight:800;letter-spacing:-.025em;line-height:1.08;font-size:clamp(1.8rem,4.2vw,3.4rem);max-width:18ch}
+  .pull .q{color:var(--velocity)}
+  .pull-sub{margin-top:1.8rem;color:var(--steel);max-width:48ch;font-size:1.02rem;line-height:1.55}
+
+  .posbox{border-left:3px solid var(--velocity);padding-left:1.5rem;max-width:62ch;margin-top:1.4rem}
+  .posbox p{font-size:clamp(1.1rem,2vw,1.65rem);font-weight:500;line-height:1.4}
+  .tagline{margin-top:2.2rem;display:flex;align-items:baseline;gap:1.3rem;flex-wrap:wrap}
+  .tagline .big{font-weight:900;font-size:clamp(1.9rem,4.4vw,3.2rem);letter-spacing:-.03em}
+  .tagline .sub{font-family:var(--mono);color:var(--steel);font-size:.84rem;letter-spacing:.06em}
+
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.2rem}
+  .pillar{border:1px solid var(--line);padding:1.4rem 1.2rem;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column}
+  .pillar .num{font-family:var(--mono);font-size:.72rem;color:var(--velocity);letter-spacing:.2em}
+  .pillar h3{margin-top:1rem;font-size:1.12rem;font-weight:800;line-height:1.12}
+  .pillar p{margin-top:.7rem;color:var(--steel);font-size:.88rem;line-height:1.5}
+  .pillar::before{content:"";position:absolute;left:0;top:0;width:0;height:3px;background:var(--velocity);transition:width .5s ease}
+  .slide.active .pillar::before{width:100%}
+  .pillar:nth-child(2)::before{transition-delay:.1s}.pillar:nth-child(3)::before{transition-delay:.2s}.pillar:nth-child(4)::before{transition-delay:.3s}
+
+  .proof{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center;margin-top:1rem}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2.3rem}
+  .stat .n{font-size:clamp(2.4rem,5vw,4rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+  .stat .l{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);margin-top:.5rem;line-height:1.4}
+  .proof-note{color:var(--steel);font-size:.98rem;line-height:1.6;max-width:34ch}
+  .proof-note .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--velocity);display:block;margin-bottom:.9rem}
+
+  /* ===== SECTION DIVIDER ===== */
+  #div{justify-content:center;align-items:flex-start;background:radial-gradient(120% 90% at 85% 15%,rgba(255,43,43,.10),transparent 55%)}
+  #div .big{font-weight:900;letter-spacing:-.035em;line-height:.9;font-size:clamp(3rem,9vw,8rem)}
+  #div .lead{margin-top:1.4rem}
+  .divmark{width:120px;height:120px;margin-bottom:2rem}
+
+  /* ===== LOGO SLIDE ===== */
+  .logo-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2.4rem;margin-top:1.4rem;align-items:center}
+  .logo-hero{background:var(--graphite);border:1px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;padding:3rem;min-height:300px;gap:2rem}
+  .logo-hero .m{width:120px;height:120px}
+  .logo-hero .lock{display:flex;flex-direction:column;gap:.5rem}
+  .logo-hero .lock .nm{font-weight:900;font-size:2.2rem;letter-spacing:-.02em;line-height:.95}
+  .logo-hero .lock .tg{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--steel)}
+  .variants{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  .vcell{border:1px solid var(--line);border-radius:5px;display:flex;align-items:center;justify-content:center;height:108px;position:relative}
+  .vcell .m{width:54px;height:54px}
+  .vcell .cap{position:absolute;bottom:.5rem;left:.6rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+  .vcell.onred{background:var(--velocity)}.vcell.onred .m{color:#fff}.vcell.onred .cap{color:rgba(255,255,255,.7)}
+  .vcell.onbone{background:var(--bone)}.vcell.onbone .m{color:var(--carbon)}.vcell.onbone .cap{color:#777}
+  .vcell.onred2 .m{color:var(--velocity)}
+
+  /* ===== CONSTRUCTION SLIDE ===== */
+  .con-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;margin-top:1.2rem;align-items:center}
+  .con-box{background:var(--graphite);border:1px solid var(--line);border-radius:6px;padding:2rem;display:flex;justify-content:center}
+  .con-box svg{width:100%;max-width:340px;height:auto}
+  .rules dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--velocity);margin-top:1.3rem}
+  .rules dd{color:var(--steel);font-size:.98rem;line-height:1.5;margin-top:.35rem;max-width:42ch}
+  .rules dt:first-child{margin-top:0}
+
+  /* ===== COLOR SLIDE ===== */
+  .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+  .sw{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .sw .fill{height:120px}
+  .sw .meta{padding:.9rem 1rem;background:var(--graphite)}
+  .sw .nm{font-weight:700;font-size:1rem}
+  .sw .hex{font-family:var(--mono);font-size:.74rem;color:var(--steel);margin-top:.25rem;letter-spacing:.05em}
+  .sw .role{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--velocity);margin-top:.5rem}
+
+  /* ===== TYPE SLIDE ===== */
+  .type-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:2.6rem;margin-top:1.2rem;align-items:center}
+  .type-spec .aa{font-weight:900;font-size:clamp(6rem,14vw,11rem);line-height:.8;letter-spacing:-.04em}
+  .type-spec .fam{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);margin-top:1rem}
+  .type-spec .fam b{color:var(--velocity)}
+  .type-mono{margin-top:1.6rem;font-family:var(--mono);font-size:1.1rem;color:var(--bone);letter-spacing:.04em}
+  .type-mono span{color:var(--steel);font-size:.72rem}
+  .scale dt{font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--bone)}
+  .scale dd{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin:.3rem 0 1.1rem}
+  .scale .s-disp{font-size:2.6rem}.scale .s-h{font-size:1.7rem}.scale .s-body{font-size:1.05rem;font-weight:500}
+  .scale .s-mono{font-family:var(--mono);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--velocity);font-weight:500}
+
+  /* ===== DESIGN LANGUAGE SLIDE ===== */
+  .lang{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.8rem}
+  .lcell{border:1px solid var(--line);border-radius:6px;padding:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+  .lcell h4{font-size:1.05rem;font-weight:800}
+  .lcell p{color:var(--steel);font-size:.85rem;line-height:1.5;margin-top:.4rem}
+  .lcell .demo{height:60px;margin-bottom:1rem;position:relative;border-radius:3px;overflow:hidden}
+  .demo-speed{background:repeating-linear-gradient(115deg,transparent 0 14px,rgba(255,43,43,.5) 14px 16px,transparent 16px 18px)}
+  .demo-redline{display:flex;align-items:center}.demo-redline::before{content:"";height:2px;width:100%;background:var(--velocity)}
+  .demo-tag{display:flex;align-items:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--velocity)}
+  .demo-tag::before{content:"";width:30px;height:1px;background:var(--velocity);margin-right:.7rem}
+  .demo-motion{background:var(--graphite-2);display:flex;align-items:center;gap:6px;padding:0 12px}
+  .demo-motion i{display:block;width:8px;height:8px;background:var(--velocity);border-radius:1px;animation:accel 1.6s var(--ease) infinite}
+  .demo-motion i:nth-child(2){animation-delay:.12s;opacity:.7}.demo-motion i:nth-child(3){animation-delay:.24s;opacity:.45}.demo-motion i:nth-child(4){animation-delay:.36s;opacity:.25}
+  @keyframes accel{0%{transform:translateX(0)}60%{transform:translateX(180px)}100%{transform:translateX(180px);opacity:0}}
+
+  /* ===== APPLICATIONS SLIDE ===== */
+  .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2rem;align-items:stretch}
+  .app{border:1px solid var(--line);border-radius:6px;padding:1.4rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;min-height:200px;background:var(--graphite)}
+  .app .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+  .avatar{width:74px;height:74px;border-radius:50%;background:var(--carbon);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  .avatar .m{width:38px;height:38px}
+  .appicon{width:74px;height:74px;border-radius:18px;background:var(--velocity);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(255,43,43,.3)}
+  .appicon .m{width:40px;height:40px;color:#fff}
+  .card{width:100%;aspect-ratio:1.7;background:var(--carbon);border:1px solid var(--line);border-radius:6px;border-left:4px solid var(--velocity);padding:.9rem;display:flex;flex-direction:column;justify-content:space-between}
+  .card .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .card .m{width:24px;height:24px}
+  .card .nm{font-weight:800;font-size:.8rem}
+  .card .dt{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;color:var(--steel)}
+  .pillbtn{background:var(--velocity);color:#fff;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.75rem 1.1rem;border-radius:3px;font-weight:600}
+
+  /* ===== WEBSITE SLIDE ===== */
+  .browser{margin-top:1.5rem;border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:980px}
+  .bbar{background:var(--graphite-2);padding:.7rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--line)}
+  .dot{width:10px;height:10px;border-radius:50%;background:#3a3a40}
+  .url{margin-left:1rem;font-family:var(--mono);font-size:.78rem;color:var(--steel);background:#000;padding:.35rem .9rem;border-radius:4px;flex:1;max-width:340px}
+  .url .accent{color:var(--bone)}
+  .bbody{padding:clamp(1.8rem,4vw,3.2rem);background:radial-gradient(120% 120% at 80% -10%,rgba(255,43,43,.10),transparent 55%),var(--carbon);display:flex;align-items:center;gap:2.4rem}
+  .bbody .m{width:70px;height:70px;flex-shrink:0}
+  .bbody .mh{font-size:clamp(2rem,5vw,3.6rem);font-weight:900;letter-spacing:-.03em;line-height:.96}
+  .bbody .ms{color:var(--steel);margin-top:1rem;font-size:1.02rem;max-width:42ch;line-height:1.5}
+
+  /* ===== NEXT SLIDE ===== */
+  .moves{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+  .move{border:1px solid var(--line);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.85rem;transition:border-color .3s,background .3s}
+  .move:hover{border-color:var(--velocity);background:rgba(255,43,43,.04)}
+  .move .mn{font-family:var(--mono);color:var(--velocity);font-size:.9rem;letter-spacing:.2em}
+  .move h3{font-size:1.2rem;font-weight:800;line-height:1.1}
+  .move p{color:var(--steel);font-size:.88rem;line-height:1.5}
+  .contact{margin-top:2.4rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--line);padding-top:1.5rem}
+  .contact .who{font-weight:700;font-size:1.1rem}
+  .contact .mail{font-family:var(--mono);color:var(--velocity);font-size:1rem;letter-spacing:.04em}
+
+  /* ===== CHROME ===== */
+  .progress{position:fixed;top:0;left:0;height:2px;background:var(--velocity);z-index:70;transition:width .5s ease}
+  .counter{position:fixed;bottom:1.5rem;left:clamp(2.2rem,5vw,5.2rem);z-index:70;font-family:var(--mono);font-size:.74rem;letter-spacing:.18em;color:var(--steel)}
+  .counter .cur{color:var(--bone)}
+  .footmark{position:fixed;bottom:1.35rem;right:clamp(2.2rem,5vw,5.2rem);z-index:70;width:26px;height:26px}
+  .dots{position:fixed;right:clamp(1rem,2.2vw,1.8rem);top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:.55rem}
+  .dots button{width:8px;height:8px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;padding:0;transition:all .3s}
+  .dots button.on{background:var(--velocity);border-color:var(--velocity);transform:scale(1.25)}
+  .arrows{position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%);z-index:70;display:flex;gap:.5rem}
+  .arrows button{background:var(--graphite);border:1px solid var(--line);color:var(--bone);width:42px;height:34px;border-radius:4px;cursor:pointer;font-size:1rem;transition:all .25s}
+  .arrows button:hover{border-color:var(--velocity);color:var(--velocity)}
+  .hint{position:fixed;bottom:3.4rem;left:50%;transform:translateX(-50%);z-index:70;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:#55555c;text-transform:uppercase}
+
+  @media (max-width:920px){
+    .pillars,.moves,.swatches,.apps{grid-template-columns:1fr 1fr}
+    .proof,.kr,.logo-grid,.con-grid,.type-grid{grid-template-columns:1fr;gap:1.4rem}
+    .rrow{grid-template-columns:1fr;gap:.2rem}.rrow .rk{color:var(--velocity)}
+    .bbody{flex-direction:column;align-items:flex-start}
+    .dots{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 COVER -->
+  <section class="slide active" id="s1">
+    <div class="cover-top reveal">
+      <div class="cover-mark mark echo">
+        <svg viewBox="0 0 120 120" fill="none">
+          <path class="e3" style="--o:.18" d="M14 40 L60 92 L106 40" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="e2" style="--o:.4" d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="e1" style="--o:1" d="M14 32 L60 84 L106 32" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="e1" style="--o:.55" d="M34 32 L60 58 L86 32" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="wordmark" style="text-align:right;color:var(--steel)">Brand &amp; Identity<br><span style="color:var(--velocity)">2026</span></div>
+    </div>
+    <div class="cover-main">
+      <div class="eyebrow reveal">Velocity Ventures Vietnam <span class="dim">/ Est. 2019 — Reborn</span></div>
+      <h1 class="reveal">Build at<br><span class="accent">velocity.</span></h1>
+      <p class="lead reveal">Backing and building AI-native companies at the intersection of AI applications, AI infrastructure, and Vietnam.</p>
+    </div>
+    <div class="cover-bottom reveal">
+      <span>Private &amp; Confidential</span>
+      <span><span class="red">velocityvv.com</span> · Duc Trinh</span>
+    </div>
+  </section>
+
+  <!-- 2 VERDICT -->
+  <section class="slide" id="s2">
+    <div class="eyebrow reveal">01 <span class="dim">/ The Verdict</span></div>
+    <h2 class="reveal" style="max-width:24ch">Don't reskin the <span class="accent">fund deck.</span></h2>
+    <p class="lead reveal" style="margin-top:1.5rem;max-width:58ch">The 2019 deck sells a model you no longer run — an LP-backed, team-driven thesis fund. Today VVV is a <span style="color:var(--bone)">solo builder-investor</span>. Keep the brand equity. Retire the operating model.</p>
+    <div class="chips reveal">
+      <div class="chip"><div class="k">Keep</div><div class="v">Name, velocity metaphor, Kamereo, the 2019 call</div></div>
+      <div class="chip"><div class="k">Shift</div><div class="v">From VC fund → solo builder-investor</div></div>
+      <div class="chip"><div class="k">The edge</div><div class="v">You can build it yourself — vibe-coded 0→1</div></div>
+    </div>
+  </section>
+
+  <!-- 3 SHIFT -->
+  <section class="slide" id="s3">
+    <div class="eyebrow reveal">02 <span class="dim">/ The Shift</span></div>
+    <h2 class="reveal">Same name. <span class="accent">New machine.</span></h2>
+    <div class="reposition reveal">
+      <div class="rrow rhead"><div class="rk">Dimension</div><div class="old">2019 VVV</div><div class="new">2026 VVV</div></div>
+      <div class="rrow"><div class="rk">What it is</div><div class="old">Early-stage VC fund</div><div class="new">Solo <b>builder-investor</b></div></div>
+      <div class="rrow"><div class="rk">Edge</div><div class="old">Team + process</div><div class="new">Builds <b>0→1</b> itself + 8-yr VN roots</div></div>
+      <div class="rrow"><div class="rk">Thesis</div><div class="old">Innovation × GDP growth</div><div class="new"><b>AI × Vietnam</b> → new product surface</div></div>
+      <div class="rrow"><div class="rk">Proof</div><div class="old">Partner CVs</div><div class="new"><b>Kamereo</b> — $15M+ raised, market leader</div></div>
+    </div>
+  </section>
+
+  <!-- 4 NARRATIVE -->
+  <section class="slide" id="s4">
+    <div class="eyebrow reveal">03 <span class="dim">/ The Narrative</span></div>
+    <p class="pull reveal">In 2019, we bet Vietnam was at a <span class="q">tipping point.</span> We were right. AI is the next one — and this time, we don't just write the check. <span class="q">We build.</span></p>
+    <p class="pull-sub reveal">Same pattern, new wave: a young, mobile-first market, fragmented incumbents, and a narrow window to build category-defining companies before the global players arrive.</p>
+  </section>
+
+  <!-- 5 POSITIONING -->
+  <section class="slide" id="s5">
+    <div class="eyebrow reveal">04 <span class="dim">/ Positioning</span></div>
+    <h2 class="reveal">The one-line <span class="accent">anchor.</span></h2>
+    <div class="posbox reveal"><p>A solo builder-investor backing and building AI-native companies at the intersection of <span class="accent">AI applications, AI infrastructure, and Vietnam</span> — combining an operator who ships 0→1 with deep ecosystem roots since 2018.</p></div>
+    <div class="tagline reveal"><span class="big">Build at <span class="accent">velocity.</span></span><span class="sub">— backing &amp; building AI, at Vietnam speed</span></div>
+  </section>
+
+  <!-- 6 PILLARS -->
+  <section class="slide" id="s6">
+    <div class="eyebrow reveal">05 <span class="dim">/ The VVV Advantage</span></div>
+    <h2 class="reveal">Four reasons to <span class="accent">work with VVV.</span></h2>
+    <div class="pillars reveal">
+      <div class="pillar"><div class="num">01</div><h3>Builder, not just backer</h3><p>AI + vibe-coding takes an idea to a working product in days. I invest in things I'd build.</p></div>
+      <div class="pillar"><div class="num">02</div><h3>Vietnam-native since 2018</h3><p>Early backer of Kamereo, now the country's #1 B2B food platform.</p></div>
+      <div class="pillar"><div class="num">03</div><h3>AI-first, narrow by design</h3><p>One thesis: AI apps × AI infra × Vietnam. No spray-and-pray.</p></div>
+      <div class="pillar"><div class="num">04</div><h3>Founder-aligned, committee-free</h3><p>No IC, no process theater. One operator at founder speed.</p></div>
+    </div>
+  </section>
+
+  <!-- 7 PROOF -->
+  <section class="slide" id="s7">
+    <div class="eyebrow reveal">06 <span class="dim">/ Proof, Not Promises</span></div>
+    <h2 class="reveal" style="margin-bottom:.5rem">Kamereo</h2>
+    <div class="proof reveal">
+      <div class="stat-grid">
+        <div class="stat"><div class="n"><span class="accent">$15M+</span></div><div class="l">Total raised — Sumitomo, SMBC,<br>Mitsubishi UFJ &amp; others</div></div>
+        <div class="stat"><div class="n">#1</div><div class="l">B2B food e-commerce<br>platform in Vietnam</div></div>
+        <div class="stat"><div class="n">2018</div><div class="l">Backed early —<br>seed stage</div></div>
+        <div class="stat"><div class="n">Series B</div><div class="l">Scaling nationwide<br>HCMC + Hanoi</div></div>
+      </div>
+      <div class="proof-note"><span class="tag">The arc</span>One early bet, eight years, market leadership — a credibility arc, and the template for the next wave.</div>
+    </div>
+  </section>
+
+  <!-- 8 SECTION DIVIDER -->
+  <section class="slide" id="div">
+    <div class="divmark mark echo reveal">
+      <svg viewBox="0 0 120 120" fill="none">
+        <path class="e3" style="--o:.18" d="M14 40 L60 92 L106 40" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="e2" style="--o:.4" d="M14 36 L60 88 L106 36" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="e1" style="--o:1" d="M14 32 L60 84 L106 32" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="e1" style="--o:.55" d="M34 32 L60 58 L86 32" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="eyebrow reveal">Part Two <span class="dim">/ The System</span></div>
+    <div class="big reveal">The Identity<br>System</div>
+    <p class="lead reveal" style="max-width:50ch">A precise, fast, operator-grade visual language — built to read as "ships product," not "raises a fund."</p>
+  </section>
+
+  <!-- 9 LOGO -->
+  <section class="slide" id="s9">
+    <div class="eyebrow reveal">07 <span class="dim">/ The Mark</span></div>
+    <h2 class="reveal">The Velocity <span class="accent">chevron.</span></h2>
+    <div class="logo-grid reveal">
+      <div class="logo-hero">
+        <div class="m mark">
+          <svg viewBox="0 0 120 120" fill="none">
+            <path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+          </svg>
+        </div>
+        <div class="lock">
+          <div class="nm">Velocity<br>Ventures</div>
+          <div class="tg">Vietnam · VVV</div>
+        </div>
+      </div>
+      <div class="variants">
+        <div class="vcell onred"><div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div><span class="cap">Reversed / red</span></div>
+        <div class="vcell onbone"><div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div><span class="cap">On bone</span></div>
+        <div class="vcell onred2"><div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div><span class="cap">Primary / carbon</span></div>
+        <div class="vcell">
+          <div class="m mark echo" style="position:relative">
+            <svg viewBox="0 0 120 120" fill="none">
+              <path d="M14 30 L60 82 L106 30" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".2"/>
+              <path d="M14 34 L60 86 L106 34" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>
+              <path d="M14 38 L60 90 L106 38" stroke="var(--velocity)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div><span class="cap">Motion / echo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 CONSTRUCTION -->
+  <section class="slide" id="s10">
+    <div class="eyebrow reveal">08 <span class="dim">/ Construction &amp; Clear Space</span></div>
+    <h2 class="reveal">Geometric, <span class="accent">to the degree.</span></h2>
+    <div class="con-grid reveal">
+      <div class="con-box">
+        <svg viewBox="0 0 240 240" fill="none">
+          <!-- grid -->
+          <g stroke="rgba(255,255,255,.10)" stroke-width="1">
+            <rect x="40" y="40" width="160" height="160"/>
+            <line x1="40" y1="80" x2="200" y2="80"/><line x1="40" y1="120" x2="200" y2="120"/><line x1="40" y1="160" x2="200" y2="160"/>
+            <line x1="80" y1="40" x2="80" y2="200"/><line x1="120" y1="40" x2="120" y2="200"/><line x1="160" y1="40" x2="160" y2="200"/>
+          </g>
+          <!-- clear space box -->
+          <rect x="22" y="22" width="196" height="196" stroke="rgba(255,43,43,.35)" stroke-width="1" stroke-dasharray="5 5"/>
+          <!-- mark -->
+          <path d="M52 92 L120 168 L188 92" stroke="var(--velocity)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M84 92 L120 132 L156 92" stroke="var(--velocity)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+          <!-- angle annotation -->
+          <text x="120" y="186" fill="var(--steel)" font-family="monospace" font-size="11" text-anchor="middle">60°</text>
+        </svg>
+      </div>
+      <dl class="rules">
+        <dt>Geometry</dt><dd>Two nested chevrons on a 60° axis. Inner chevron sits at exactly half the outer height — the heritage "VV" read.</dd>
+        <dt>Stroke</dt><dd>Single uniform weight, rounded caps and joins. Inner echo holds 55% opacity to signal depth and motion.</dd>
+        <dt>Clear space</dt><dd>Minimum margin equals the inner chevron's width on every side. Never crowd the mark.</dd>
+        <dt>Minimum size</dt><dd>24px digital / 8mm print. Below this, drop the inner echo for legibility.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 11 COLOR -->
+  <section class="slide" id="s11">
+    <div class="eyebrow reveal">09 <span class="dim">/ Color System</span></div>
+    <h2 class="reveal">Carbon &amp; <span class="accent">velocity red.</span></h2>
+    <div class="swatches reveal">
+      <div class="sw"><div class="fill" style="background:#08080a"></div><div class="meta"><div class="nm">Carbon</div><div class="hex">#08080A</div><div class="role">Background / base</div></div></div>
+      <div class="sw"><div class="fill" style="background:#ff2b2b"></div><div class="meta"><div class="nm">Velocity Red</div><div class="hex">#FF2B2B</div><div class="role">Primary accent</div></div></div>
+      <div class="sw"><div class="fill" style="background:#f4f2ec"></div><div class="meta"><div class="nm">Bone</div><div class="hex">#F4F2EC</div><div class="role">Primary ink</div></div></div>
+      <div class="sw"><div class="fill" style="background:#16161a"></div><div class="meta"><div class="nm">Graphite</div><div class="hex">#16161A</div><div class="role">Panels / cards</div></div></div>
+      <div class="sw"><div class="fill" style="background:#c40d0d"></div><div class="meta"><div class="nm">Redline</div><div class="hex">#C40D0D</div><div class="role">Pressed / deep</div></div></div>
+      <div class="sw"><div class="fill" style="background:#8f8f97"></div><div class="meta"><div class="nm">Steel</div><div class="hex">#8F8F97</div><div class="role">Muted / secondary</div></div></div>
+    </div>
+    <p class="lead reveal" style="margin-top:1.4rem;font-size:.95rem;max-width:60ch">Discipline rule: red is a scalpel, not a coat of paint. One dominant carbon field, bone for reading, red reserved for the single thing that matters on screen.</p>
+  </section>
+
+  <!-- 12 TYPOGRAPHY -->
+  <section class="slide" id="s12">
+    <div class="eyebrow reveal">10 <span class="dim">/ Typography</span></div>
+    <h2 class="reveal">Two voices, <span class="accent">one system.</span></h2>
+    <div class="type-grid reveal">
+      <div class="type-spec">
+        <div class="aa">Aa</div>
+        <div class="fam"><b>Archivo</b> — display &amp; body · 400 / 800 / 900</div>
+        <div class="type-mono">Spline Sans Mono<br><span>TELEMETRY · LABELS · DATA · 500</span></div>
+      </div>
+      <dl class="scale">
+        <dt class="s-disp">Build at velocity.</dt><dd>Display · Archivo 900 · −3% tracking</dd>
+        <dt class="s-h">Same name. New machine.</dt><dd>Headline · Archivo 800</dd>
+        <dt class="s-body">Backing and building AI-native companies.</dt><dd>Body · Archivo 400–500 · 1.5 line</dd>
+        <dt class="s-mono">07 / The Mark</dt><dd>Telemetry label · Mono 500 · +30% tracking · uppercase</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 13 DESIGN LANGUAGE -->
+  <section class="slide" id="s13">
+    <div class="eyebrow reveal">11 <span class="dim">/ Design Language</span></div>
+    <h2 class="reveal">The recurring <span class="accent">signals.</span></h2>
+    <div class="lang reveal">
+      <div class="lcell"><div class="demo demo-speed"></div><div><h4>Speed lines</h4><p>115° diagonal hatching as ambient texture — the motorsport undertone, always faint.</p></div></div>
+      <div class="lcell"><div class="demo demo-redline"></div><div><h4>The redline</h4><p>A single red hairline divides and frames. Structure, not decoration.</p></div></div>
+      <div class="lcell"><div class="demo"><div class="demo-tag">07 / The Mark</div></div><div><h4>Telemetry tags</h4><p>Numbered mono eyebrows orient every section like a timing screen.</p></div></div>
+      <div class="lcell"><div class="demo demo-motion"><i></i><i></i><i></i><i></i></div><div><h4>Acceleration motion</h4><p>Staggered reveals on one easing curve — fast in, settled. Never bouncy.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 14 APPLICATIONS -->
+  <section class="slide" id="s14">
+    <div class="eyebrow reveal">12 <span class="dim">/ Applications</span></div>
+    <h2 class="reveal">The system, <span class="accent">in the wild.</span></h2>
+    <div class="apps reveal">
+      <div class="app">
+        <div class="avatar"><div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div></div>
+        <span class="cap">Social avatar</span>
+      </div>
+      <div class="app">
+        <div class="appicon"><div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/></svg></div></div>
+        <span class="cap">App icon / favicon</span>
+      </div>
+      <div class="app">
+        <div class="card">
+          <div class="top"><div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="var(--velocity)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="var(--velocity)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div><div class="dt" style="text-align:right">VELOCITYVV.COM</div></div>
+          <div><div class="nm">Duc Trinh</div><div class="dt">SOLO BUILDER-INVESTOR</div></div>
+        </div>
+        <span class="cap">Business card</span>
+      </div>
+      <div class="app">
+        <span class="pillbtn">Build at velocity</span>
+        <span class="cap">Primary button</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 WEBSITE -->
+  <section class="slide" id="s15">
+    <div class="eyebrow reveal">13 <span class="dim">/ velocityvv.com</span></div>
+    <h2 class="reveal">The site, <span class="accent">in one screen.</span></h2>
+    <div class="browser reveal">
+      <div class="bbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">velocityvv<span class="accent">.com</span></span></div>
+      <div class="bbody">
+        <div class="m mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div>
+        <div>
+          <div class="mh">Build at <span class="accent">velocity.</span></div>
+          <p class="ms">Backing and building AI-native companies at the intersection of AI and Vietnam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 NEXT -->
+  <section class="slide" id="s16">
+    <div class="eyebrow reveal">14 <span class="dim">/ Next Move</span></div>
+    <h2 class="reveal">Pick one. <span class="accent">I'll ship it.</span></h2>
+    <div class="moves reveal">
+      <div class="move"><div class="mn">A</div><h3>Build the live landing page</h3><p>velocityvv.com on this exact identity — production-ready single file.</p></div>
+      <div class="move"><div class="mn">B</div><h3>Export the logo assets</h3><p>SVG/PNG mark set, favicon, avatar, social kit in every variant.</p></div>
+      <div class="move"><div class="mn">C</div><h3>Cut the warm-intro deck</h3><p>The builder-investor pitch in this system, as editable .pptx.</p></div>
+    </div>
+    <div class="contact reveal">
+      <div>
+        <div class="who">Duc Trinh — Velocity Ventures Vietnam</div>
+        <div style="color:var(--steel);font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;margin-top:.4rem">SOLO BUILDER-INVESTOR · AI × VIETNAM</div>
+      </div>
+      <div class="mail">duc@velocityvv.com</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="counter"><span class="cur" id="cur">01</span> / <span id="tot">16</span></div>
+<div class="footmark mark"><svg viewBox="0 0 120 120" fill="none"><path d="M14 36 L60 88 L106 36" stroke="var(--velocity)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 36 L60 62 L86 36" stroke="var(--velocity)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg></div>
+<div class="dots" id="dots"></div>
+<div class="arrows"><button id="prev" aria-label="Previous">‹</button><button id="next" aria-label="Next">›</button></div>
+<div class="hint">← → or space to navigate</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let i=0;
+  const cur=document.getElementById('cur'),progress=document.getElementById('progress');
+  document.getElementById('tot').textContent=String(total).padStart(2,'0');
+  const dotsWrap=document.getElementById('dots');
+  slides.forEach((_,n)=>{const b=document.createElement('button');b.addEventListener('click',()=>go(n));dotsWrap.appendChild(b)});
+  const dots=[...dotsWrap.children];
+  function go(n){
+    i=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+    cur.textContent=String(i+1).padStart(2,'0');
+    progress.style.width=((i+1)/total*100)+'%';
+  }
+  const next=()=>go(i+1),prev=()=>go(i-1);
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next()}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+    if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+  });
+  let x0=null;
+  window.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  window.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50){dx<0?next():prev()}x0=null},{passive:true});
+  go(0);
+</script>
+</body>
+</html>

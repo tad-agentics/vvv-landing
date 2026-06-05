@@ -1,0 +1,14 @@
+{
+  "name": "vvv-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Velocity Ventures Vietnam stealth landing page",
+  "scripts": {
+    "dev": "serve .",
+    "start": "serve .",
+    "build": "echo 'Static site — no build step required'"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

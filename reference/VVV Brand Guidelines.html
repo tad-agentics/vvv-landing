@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocity Ventures Vietnam — Brand Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#08080a;
+    --graphite:#16161a;
+    --graphite-2:#101013;
+    --steel:#8f8f97;
+    --bone:#f4f2ec;
+    --velocity:#ff2b2b;
+    --redline:#c40d0d;
+    --line:rgba(255,255,255,.12);
+    --faint:rgba(255,255,255,.06);
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'Be Vietnam Pro',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+    --maxw:1180px;
+    --gut:clamp(1.5rem,5vw,5rem);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--carbon);color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.035;mix-blend-mode:screen;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  a{color:inherit}
+  ::selection{background:var(--velocity);color:#fff}
+
+  /* ============ LAYOUT ============ */
+  .shell{display:grid;grid-template-columns:268px 1fr;min-height:100vh}
+  /* sidebar */
+  .nav{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:2rem 1.6rem;display:flex;flex-direction:column;background:var(--graphite-2);overflow-y:auto}
+  .nav .brand{display:flex;align-items:center;gap:.85rem;margin-bottom:.4rem}
+  .nav .brand .m{width:34px;height:34px;color:var(--velocity)}
+  .nav .brand .wm{font-weight:900;font-size:1.05rem;letter-spacing:-.02em;line-height:.95}
+  .nav .brand .wm span{display:block;font-family:var(--mono);font-weight:500;font-size:.56rem;letter-spacing:.26em;color:var(--steel);text-transform:uppercase;margin-top:.3rem}
+  .nav .doclabel{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--steel);margin:1.6rem 0 1rem;padding-top:1.4rem;border-top:1px solid var(--line)}
+  .nav ul{list-style:none}
+  .nav li a{display:flex;align-items:baseline;gap:.7rem;text-decoration:none;color:var(--steel);font-size:.9rem;padding:.5rem .6rem;border-radius:4px;transition:color .2s,background .2s;font-weight:500}
+  .nav li a .ix{font-family:var(--mono);font-size:.62rem;color:#55555c;letter-spacing:.1em}
+  .nav li a:hover{color:var(--bone);background:var(--faint)}
+  .nav li a.active{color:var(--bone);background:rgba(255,43,43,.1)}
+  .nav li a.active .ix{color:var(--velocity)}
+  .nav .navfoot{margin-top:auto;padding-top:1.6rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:#55555c;line-height:1.7}
+  .nav .navfoot .red{color:var(--velocity)}
+
+  /* main */
+  main{min-width:0}
+  section{padding:clamp(3.5rem,7vw,6.5rem) var(--gut);border-bottom:1px solid var(--faint);max-width:calc(var(--maxw) + 2*var(--gut))}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--velocity);display:flex;align-items:center;gap:.85rem;margin-bottom:1.4rem}
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--velocity)}
+  .eyebrow .dim{color:var(--steel)}
+  h2.sec{font-weight:900;letter-spacing:-.03em;line-height:1;font-size:clamp(2.1rem,4.6vw,3.6rem);max-width:18ch}
+  .accent{color:var(--velocity)}
+  .seclead{color:var(--steel);font-size:clamp(1.02rem,1.5vw,1.2rem);line-height:1.55;max-width:56ch;margin-top:1.4rem}
+  .subhead{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--velocity);margin:2.8rem 0 1.2rem;display:flex;align-items:center;gap:.7rem}
+  .subhead .n{color:#55555c}
+
+  /* ============ HERO ============ */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:var(--gut);position:relative;overflow:hidden;max-width:none}
+  .hero::after{content:"";position:absolute;top:0;right:0;width:46%;height:100%;pointer-events:none;opacity:.6;z-index:0;
+    background:repeating-linear-gradient(115deg,transparent 0 40px,rgba(255,255,255,.02) 40px 41px);
+    -webkit-mask-image:linear-gradient(115deg,transparent 30%,#000 100%);mask-image:linear-gradient(115deg,transparent 30%,#000 100%)}
+  .hero > *{position:relative;z-index:1}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .hero-mark{width:88px;height:88px;color:var(--velocity)}
+  .hero-top .meta{text-align:right;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--steel);line-height:1.9}
+  .hero-top .meta .red{color:var(--velocity)}
+  .hero h1{font-weight:900;letter-spacing:-.035em;line-height:.9;font-size:clamp(3rem,11vw,9rem);margin-top:1rem}
+  .hero .hlead{color:#c9c7c1;font-size:clamp(1.05rem,1.8vw,1.4rem);max-width:46ch;margin-top:1.6rem;line-height:1.5}
+  .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--steel);flex-wrap:wrap;gap:1rem}
+  .hero-bottom .red{color:var(--velocity)}
+  .scrolltip{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:#55555c;text-transform:uppercase}
+
+  /* ============ FOUNDATION ============ */
+  .anchor-box{padding:0;max-width:64ch;margin-top:1.2rem}
+  .anchor-box::before{content:"";display:block;width:44px;height:3px;background:var(--velocity);margin-bottom:1.4rem}
+  .anchor-box p{font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:500;line-height:1.4;letter-spacing:-.01em}
+  .pos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.6rem}
+  .pcard{border:1px solid var(--line);padding:1.5rem 1.4rem;background:var(--graphite-2)}
+  .pcard .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--velocity);margin-bottom:.7rem}
+  .pcard .v{font-size:1rem;line-height:1.45;color:var(--bone);font-weight:500}
+  .pcard .v b{color:var(--velocity)}
+  .tagline-row{margin-top:2.6rem;display:flex;align-items:baseline;gap:1.4rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:2rem}
+  .tagline-row .big{font-weight:900;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.03em}
+  .tagline-row .sub{font-family:var(--mono);color:var(--steel);font-size:.82rem;letter-spacing:.04em}
+
+  /* ============ LOGO ============ */
+  .logo-hero{background:var(--graphite);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;padding:clamp(2.5rem,6vw,4.5rem);gap:2.4rem;margin-top:.6rem;flex-wrap:wrap}
+  .logo-hero .m{width:128px;height:128px;color:var(--velocity)}
+  .logo-hero .lock{display:flex;flex-direction:column;gap:.6rem}
+  .logo-hero .lock .nm{font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em;line-height:.92}
+  .logo-hero .lock .tg{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--steel)}
+  .variants{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.4rem}
+  .vcell{border:1px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;height:140px;position:relative}
+  .vcell .m{width:62px;height:62px}
+  .vcell .cap{position:absolute;bottom:.6rem;left:.7rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+  .vcell.primary .m{color:var(--velocity)}
+  .vcell.onred{background:var(--velocity)}.vcell.onred .m{color:#fff}.vcell.onred .cap{color:rgba(255,255,255,.75)}
+  .vcell.onbone{background:var(--bone)}.vcell.onbone .m{color:var(--velocity)}.vcell.onbone .cap{color:#777}
+  .vcell.onbone-k .m{color:var(--carbon)}.vcell.onbone-k{background:var(--bone)}.vcell.onbone-k .cap{color:#777}
+
+  .con-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;margin-top:.6rem;align-items:center}
+  .con-box{background:var(--graphite);border:1px solid var(--line);border-radius:8px;padding:2rem;display:flex;justify-content:center}
+  .con-box svg{width:100%;max-width:360px;height:auto}
+  dl.rules dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--velocity);margin-top:1.5rem}
+  dl.rules dd{color:var(--steel);font-size:.98rem;line-height:1.55;margin-top:.4rem;max-width:46ch}
+  dl.rules dt:first-child{margin-top:0}
+
+  .misuse{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.4rem}
+  .mcell{border:1px solid var(--line);border-radius:6px;height:150px;position:relative;display:flex;align-items:center;justify-content:center;background:var(--graphite-2);overflow:hidden}
+  .mcell .m{width:60px;height:60px;color:var(--velocity)}
+  .mcell .x{position:absolute;top:.6rem;right:.6rem;width:20px;height:20px;border-radius:50%;background:var(--velocity);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;line-height:1}
+  .mcell .cap{position:absolute;bottom:.55rem;left:.7rem;right:.7rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);line-height:1.4}
+  .mcell.squash .m{transform:scaleX(1.6)}
+  .mcell.rotate .m{transform:rotate(22deg)}
+  .mcell.recolor .m{color:#3aa3ff}
+  .mcell.crowd{flex-direction:column;gap:0}
+  .mcell.crowd .m{width:44px;height:44px}
+  .mcell.crowd .fake{font-weight:900;font-size:.8rem;margin-top:2px}
+
+  /* ============ COLOR ============ */
+  .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.6rem}
+  .sw{border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .25s var(--ease),border-color .25s}
+  .sw:hover{transform:translateY(-3px);border-color:var(--velocity)}
+  .sw .fill{height:128px;position:relative}
+  .sw .fill .copy{position:absolute;top:.6rem;right:.7rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;opacity:0;transition:opacity .2s;padding:.25rem .5rem;border-radius:3px;background:rgba(0,0,0,.4);color:#fff}
+  .sw:hover .fill .copy{opacity:1}
+  .sw .meta{padding:1rem 1.1rem;background:var(--graphite-2)}
+  .sw .nm{font-weight:700;font-size:1.02rem}
+  .sw .hex{font-family:var(--mono);font-size:.74rem;color:var(--steel);margin-top:.3rem;letter-spacing:.04em;text-transform:uppercase}
+  .sw .role{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--velocity);margin-top:.6rem}
+  .ratio-tbl{margin-top:2rem;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:.9rem}
+  .ratio-tbl .rh,.ratio-tbl .rr{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:1rem;padding:.9rem 1.2rem;align-items:center}
+  .ratio-tbl .rh{background:var(--graphite-2);font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+  .ratio-tbl .rr{border-top:1px solid var(--faint)}
+  .ratio-tbl .pair{display:flex;align-items:center;gap:.7rem}
+  .ratio-tbl .chip{width:26px;height:26px;border-radius:4px;border:1px solid var(--line);flex-shrink:0}
+  .ratio-tbl .pass{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:#39d98a}
+  .ratio-tbl .warn{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:#f5a623}
+  .ratio-tbl .num{font-family:var(--mono);color:var(--bone)}
+  .discipline{margin-top:2rem;background:rgba(255,43,43,.06);border:1px solid rgba(255,43,43,.25);border-radius:8px;padding:1.5rem 1.7rem;display:flex;gap:1.3rem;align-items:flex-start}
+  .discipline .m{width:40px;height:40px;color:var(--velocity);flex-shrink:0}
+  .discipline p{color:#d8d6d0;font-size:1rem;line-height:1.55;max-width:62ch}
+  .discipline p b{color:var(--velocity)}
+
+  /* ============ TYPE ============ */
+  .type-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:2.6rem;margin-top:.6rem;align-items:center}
+  .type-spec{background:var(--graphite);border:1px solid var(--line);border-radius:8px;padding:clamp(1.8rem,4vw,2.8rem)}
+  .type-spec .aa{font-weight:900;font-size:clamp(5.5rem,13vw,10rem);line-height:.8;letter-spacing:-.04em}
+  .type-spec .fam{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-top:1.2rem}
+  .type-spec .fam b{color:var(--velocity)}
+  .type-spec .glyphs{font-family:var(--mono);color:var(--steel);font-size:.84rem;margin-top:.8rem;letter-spacing:.06em;word-spacing:.2em}
+  .type-mono-card{margin-top:1.2rem;border:1px solid var(--line);border-radius:8px;padding:1.6rem 1.8rem;background:var(--graphite-2)}
+  .type-mono-card .ms{font-family:var(--mono);font-size:1.25rem;color:var(--bone);letter-spacing:.02em}
+  .type-mono-card .sub{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;color:var(--velocity);text-transform:uppercase;margin-top:.7rem}
+  dl.scale dt{font-weight:800;letter-spacing:-.02em;line-height:1.05;color:var(--bone)}
+  dl.scale dd{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);margin:.4rem 0 1.4rem;border-bottom:1px solid var(--faint);padding-bottom:1.4rem}
+  dl.scale dd:last-child{border-bottom:none}
+  .scale .s-disp{font-size:clamp(2.2rem,4vw,3rem)}
+  .scale .s-h{font-size:clamp(1.5rem,2.6vw,1.9rem)}
+  .scale .s-body{font-size:1.05rem;font-weight:500}
+  .scale .s-mono{font-family:var(--mono);font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;color:var(--velocity);font-weight:500}
+
+  /* ============ VOICE ============ */
+  .voice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.6rem}
+  .vbox{border:1px solid var(--line);border-radius:8px;padding:1.6rem;background:var(--graphite-2)}
+  .vbox h4{font-size:1.1rem;font-weight:800;margin-bottom:.6rem}
+  .vbox p{color:var(--steel);font-size:.92rem;line-height:1.55}
+  .vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem}
+  .vs{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .vs .vh{padding:.8rem 1.2rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.6rem}
+  .vs.yes .vh{background:rgba(57,217,138,.1);color:#39d98a}
+  .vs.no .vh{background:rgba(255,43,43,.08);color:var(--velocity)}
+  .vs ul{list-style:none;padding:1.1rem 1.3rem}
+  .vs li{font-size:.95rem;line-height:1.5;padding:.5rem 0;border-bottom:1px solid var(--faint);color:#d8d6d0}
+  .vs li:last-child{border-bottom:none}
+  .boiler{margin-top:1.6rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+  .boiler .bcard{border:1px solid var(--line);border-radius:8px;padding:1.4rem 1.5rem;background:var(--graphite-2);position:relative}
+  .boiler .bcard .len{position:absolute;top:1rem;right:1.2rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;color:#55555c;text-transform:uppercase}
+  .boiler .bcard .lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--velocity);margin-bottom:.8rem}
+  .boiler .bcard p{font-size:.96rem;line-height:1.55;color:#d8d6d0}
+  .boiler .bcard .copybtn{margin-top:1rem}
+
+  /* ============ DESIGN LANGUAGE ============ */
+  .lang{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:.6rem}
+  .lcell{border:1px solid var(--line);border-radius:8px;padding:1.7rem;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative;background:var(--graphite-2)}
+  .lcell h4{font-size:1.12rem;font-weight:800}
+  .lcell p{color:var(--steel);font-size:.9rem;line-height:1.55;margin-top:.4rem;max-width:42ch}
+  .lcell .demo{height:64px;margin-bottom:1.2rem;position:relative;border-radius:4px;overflow:hidden}
+  .demo-speed{background:repeating-linear-gradient(115deg,transparent 0 14px,rgba(255,43,43,.5) 14px 16px,transparent 16px 18px)}
+  .demo-redline{display:flex;align-items:center}.demo-redline::before{content:"";height:2px;width:100%;background:var(--velocity)}
+  .demo-tag{display:flex;align-items:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--velocity)}
+  .demo-tag::before{content:"";width:30px;height:1px;background:var(--velocity);margin-right:.7rem}
+  .demo-motion{background:var(--graphite);display:flex;align-items:center;gap:6px;padding:0 14px}
+  .demo-motion i{display:block;width:9px;height:9px;background:var(--velocity);border-radius:2px;animation:accel 1.8s var(--ease) infinite}
+  .demo-motion i:nth-child(2){animation-delay:.12s;opacity:.7}.demo-motion i:nth-child(3){animation-delay:.24s;opacity:.45}.demo-motion i:nth-child(4){animation-delay:.36s;opacity:.25}
+  @keyframes accel{0%{transform:translateX(0)}55%{transform:translateX(200px)}100%{transform:translateX(200px);opacity:0}}
+
+  /* ============ APPLICATIONS ============ */
+  .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:.6rem;align-items:stretch}
+  .app{border:1px solid var(--line);border-radius:8px;padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;min-height:210px;background:var(--graphite)}
+  .app .cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+  .avatar{width:78px;height:78px;border-radius:50%;background:var(--carbon);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  .avatar .m{width:40px;height:40px;color:var(--velocity)}
+  .appicon{width:78px;height:78px;border-radius:19px;background:var(--velocity);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(255,43,43,.3)}
+  .appicon .m{width:42px;height:42px;color:#fff}
+  .bizcard{width:100%;aspect-ratio:1.7;background:var(--carbon);border:1px solid var(--line);border-radius:6px;border-bottom:3px solid var(--velocity);padding:1rem;display:flex;flex-direction:column;justify-content:space-between}
+  .bizcard .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .bizcard .m{width:26px;height:26px;color:var(--velocity)}
+  .bizcard .nm{font-weight:800;font-size:.85rem}
+  .bizcard .dt{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;color:var(--steel)}
+  .pillbtn{background:var(--velocity);color:#fff;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 1.2rem;border-radius:4px;font-weight:600;border:none;cursor:pointer}
+
+  /* email signature */
+  .sig-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--graphite-2)}
+  .sig-stage{background:#ffffff;padding:clamp(1.8rem,5vw,3rem);display:flex;align-items:center;justify-content:center;background-image:radial-gradient(rgba(8,8,10,.06) .5px,transparent .5px);background-size:16px 16px}
+  .sig-bar{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;border-top:1px solid var(--line);flex-wrap:wrap}
+  .sig-hint{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin-left:auto}
+  @media (max-width:560px){.sig-hint{margin-left:0;width:100%}}
+
+  /* ============ DOWNLOAD CENTER ============ */
+  #downloads{background:radial-gradient(120% 80% at 85% 10%,rgba(255,43,43,.08),transparent 55%)}
+  .dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:.6rem}
+  .dl-card{border:1px solid var(--line);border-radius:8px;background:var(--graphite-2);overflow:hidden;display:flex;flex-direction:column}
+  .dl-prev{height:150px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);position:relative}
+  .dl-prev .m{width:64px;height:64px}
+  .dl-prev.onred{background:var(--velocity)}.dl-prev.onred .m{color:#fff}
+  .dl-prev.onbone{background:var(--bone)}.dl-prev.onbone .m{color:var(--velocity)}
+  .dl-prev.onbone-k{background:var(--bone)}.dl-prev.onbone-k .m{color:var(--carbon)}
+  .dl-prev.oncarbon{background:var(--carbon)}.dl-prev.oncarbon .m{color:var(--velocity)}
+  .dl-prev.swatchset{flex-direction:row;gap:0}
+  .dl-prev.swatchset i{flex:1;height:100%}
+  .dl-prev.icon{background:var(--carbon)}
+  .dl-prev .appicon{width:74px;height:74px}
+  .dl-body{padding:1.2rem 1.3rem;display:flex;flex-direction:column;flex:1}
+  .dl-body .nm{font-weight:700;font-size:1rem}
+  .dl-body .desc{color:var(--steel);font-size:.82rem;line-height:1.45;margin-top:.4rem;flex:1}
+  .dl-body .btns{display:flex;gap:.5rem;margin-top:1.1rem;flex-wrap:wrap}
+  .btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.55rem .85rem;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--bone);cursor:pointer;transition:all .2s;font-weight:500;display:inline-flex;align-items:center;gap:.4rem}
+  .btn:hover{border-color:var(--velocity);color:var(--velocity)}
+  .btn.solid{background:var(--velocity);border-color:var(--velocity);color:#fff}
+  .btn.solid:hover{background:var(--redline);border-color:var(--redline);color:#fff}
+  .copybtn{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem .8rem;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--steel);cursor:pointer;transition:all .2s}
+  .copybtn:hover{border-color:var(--velocity);color:var(--velocity)}
+  .dl-note{margin-top:2rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--steel);line-height:1.7;border-top:1px solid var(--line);padding-top:1.6rem}
+  .dl-note .red{color:var(--velocity)}
+
+  /* token snapshot */
+  .tokencode{margin-top:2rem;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .tokencode .tc-head{background:var(--graphite-2);padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+  .tokencode .tc-head .fn{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--steel)}
+  .tokencode pre{padding:1.4rem;overflow-x:auto;font-family:var(--mono);font-size:.78rem;line-height:1.7;color:#d8d6d0}
+  .tokencode pre .c{color:#55555c}
+  .tokencode pre .v{color:var(--velocity)}
+
+  /* toast */
+  .toast{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%) translateY(120%);z-index:300;background:var(--bone);color:var(--carbon);font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.3rem;border-radius:5px;transition:transform .35s var(--ease);box-shadow:0 10px 40px rgba(0,0,0,.5);font-weight:600}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  /* footer */
+  footer{padding:3rem var(--gut);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:none}
+  footer .who{font-weight:700}
+  footer .who span{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;color:var(--steel);text-transform:uppercase;margin-top:.4rem}
+  footer .mail{font-family:var(--mono);color:var(--velocity);font-size:.95rem;letter-spacing:.04em}
+  footer .pagelink{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--steel);text-decoration:none;border:1px solid var(--line);padding:.7rem 1rem;border-radius:5px;transition:all .2s}
+  footer .pagelink:hover{border-color:var(--velocity);color:var(--velocity)}
+
+  /* mobile */
+  .navtoggle{display:none}
+  @media (max-width:980px){
+    .shell{grid-template-columns:1fr}
+    .nav{position:fixed;z-index:150;width:268px;transform:translateX(-100%);transition:transform .3s var(--ease)}
+    .nav.open{transform:translateX(0)}
+    .navtoggle{display:flex;position:fixed;top:1rem;left:1rem;z-index:160;background:var(--graphite);border:1px solid var(--line);color:var(--bone);width:44px;height:44px;border-radius:6px;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem}
+    .pos-grid,.boiler,.voice-grid{grid-template-columns:1fr}
+    .swatches,.variants,.misuse,.apps,.dl-grid{grid-template-columns:1fr 1fr}
+    .con-grid,.type-grid,.vs-grid,.lang{grid-template-columns:1fr;gap:1.4rem}
+    .ratio-tbl .rh,.ratio-tbl .rr{grid-template-columns:1.4fr 1fr;gap:.6rem}
+    .ratio-tbl .rh span:nth-child(3),.ratio-tbl .rh span:nth-child(4),.ratio-tbl .rr > :nth-child(3),.ratio-tbl .rr > :nth-child(4){display:none}
+  }
+  @media (max-width:560px){
+    .swatches,.variants,.misuse,.apps,.dl-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<button class="navtoggle" id="navtoggle" aria-label="Menu">☰</button>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="nav" id="nav">
+    <div class="brand">
+      <div class="m" data-mark="echo"></div>
+      <div class="wm">VVV<span>Brand Guidelines</span></div>
+    </div>
+    <div class="doclabel">Contents</div>
+    <ul id="navlist">
+      <li><a href="#foundation"><span class="ix">01</span> Foundation</a></li>
+      <li><a href="#logo"><span class="ix">02</span> Logo &amp; Mark</a></li>
+      <li><a href="#color"><span class="ix">03</span> Color</a></li>
+      <li><a href="#type"><span class="ix">04</span> Typography</a></li>
+      <li><a href="#voice"><span class="ix">05</span> Voice &amp; Tone</a></li>
+      <li><a href="#language"><span class="ix">06</span> Design Language</a></li>
+      <li><a href="#applications"><span class="ix">07</span> Applications</a></li>
+      <li><a href="#downloads"><span class="ix">08</span> Asset Downloads</a></li>
+    </ul>
+    <div class="navfoot">
+      VELOCITY VENTURES VIETNAM<br>
+      <span class="red">velocityvv.com</span><br>
+      Brand v1.0 · 2026
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-mark" data-mark="echo-big"></div>
+        <div class="meta">Brand &amp; Identity<br><span class="red">v1.0 — 2026</span></div>
+      </div>
+      <div>
+        <div class="eyebrow">Velocity Ventures Vietnam <span class="dim">/ Brand Guidelines</span></div>
+        <h1>Build at<br><span class="accent">velocity.</span></h1>
+        <p class="hlead">The complete identity system — logo, color, type, voice, and the rules that keep it sharp. Built to read as <em>ships product</em>, not <em>raises a fund</em>.</p>
+      </div>
+      <div class="hero-bottom">
+        <span>Private &amp; Confidential</span>
+        <span class="scrolltip">Scroll to begin ↓</span>
+        <span><span class="red">velocityvv.com</span> · Duc Trinh</span>
+      </div>
+    </section>
+
+    <!-- 01 FOUNDATION -->
+    <section id="foundation">
+      <div class="eyebrow">01 <span class="dim">/ Foundation</span></div>
+      <h2 class="sec">The brand in <span class="accent">one breath.</span></h2>
+      <p class="seclead">VVV keeps its name and velocity metaphor but retires the 2019 fund model. Today it is a solo builder-investor — and the brand has to say that before a single word is read.</p>
+
+      <div class="subhead"><span class="n">1.1</span> The positioning anchor</div>
+      <div class="anchor-box">
+        <p>A solo builder-investor backing and building AI-native companies at the intersection of <span class="accent">AI applications, AI infrastructure, and Vietnam</span> — combining an operator who ships 0→1 with deep ecosystem roots since 2018.</p>
+      </div>
+
+      <div class="subhead"><span class="n">1.2</span> What the brand keeps &amp; shifts</div>
+      <div class="pos-grid">
+        <div class="pcard"><div class="k">Keep</div><div class="v">The <b>name</b>, the velocity metaphor, the Kamereo proof, and the 2019 Vietnam call.</div></div>
+        <div class="pcard"><div class="k">Shift</div><div class="v">From an LP-backed VC fund to a <b>solo builder-investor</b> who ships product.</div></div>
+        <div class="pcard"><div class="k">The edge</div><div class="v">Doesn't just write the check — <b>builds it</b>, vibe-coded 0→1, at founder speed.</div></div>
+      </div>
+
+      <div class="tagline-row">
+        <span class="big">Build at <span class="accent">velocity.</span></span>
+        <span class="sub">— backing &amp; building AI, at Vietnam speed</span>
+      </div>
+    </section>
+
+    <!-- 02 LOGO -->
+    <section id="logo">
+      <div class="eyebrow">02 <span class="dim">/ Logo &amp; Mark</span></div>
+      <h2 class="sec">The Velocity <span class="accent">chevron.</span></h2>
+      <p class="seclead">Two nested chevrons on a 60° axis — a forward-motion arrow that also reads as the "VV" of the name. Precise, fast, geometric to the degree.</p>
+
+      <div class="subhead"><span class="n">2.1</span> Primary lockup</div>
+      <div class="logo-hero">
+        <div class="m" data-mark="duo" style="width:128px;height:128px"></div>
+        <div class="lock">
+          <div class="nm">Velocity<br>Ventures</div>
+          <div class="tg">Vietnam · VVV</div>
+        </div>
+      </div>
+
+      <div class="subhead"><span class="n">2.2</span> Variants &amp; backgrounds</div>
+      <div class="variants">
+        <div class="vcell primary"><div class="m" data-mark="duo"></div><span class="cap">Primary / carbon</span></div>
+        <div class="vcell onred"><div class="m" data-mark="duo"></div><span class="cap">Reversed / on red</span></div>
+        <div class="vcell onbone"><div class="m" data-mark="duo"></div><span class="cap">Red / on bone</span></div>
+        <div class="vcell onbone-k"><div class="m" data-mark="duo"></div><span class="cap">Carbon / on bone</span></div>
+      </div>
+
+      <div class="subhead"><span class="n">2.3</span> Construction &amp; clear space</div>
+      <div class="con-grid">
+        <div class="con-box">
+          <svg viewBox="0 0 240 240" fill="none">
+            <g stroke="rgba(255,255,255,.10)" stroke-width="1">
+              <rect x="40" y="40" width="160" height="160"/>
+              <line x1="40" y1="80" x2="200" y2="80"/><line x1="40" y1="120" x2="200" y2="120"/><line x1="40" y1="160" x2="200" y2="160"/>
+              <line x1="80" y1="40" x2="80" y2="200"/><line x1="120" y1="40" x2="120" y2="200"/><line x1="160" y1="40" x2="160" y2="200"/>
+            </g>
+            <rect x="22" y="22" width="196" height="196" stroke="rgba(255,43,43,.35)" stroke-width="1" stroke-dasharray="5 5"/>
+            <path d="M52 92 L120 168 L188 92" stroke="#ff2b2b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M84 92 L120 132 L156 92" stroke="#ff2b2b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+            <text x="120" y="200" fill="#8f8f97" font-family="monospace" font-size="11" text-anchor="middle">60° axis · clear space = inner chevron width</text>
+          </svg>
+        </div>
+        <dl class="rules">
+          <dt>Geometry</dt><dd>Two nested chevrons on a 60° axis. The inner chevron sits at exactly half the outer height — the heritage "VV" read.</dd>
+          <dt>Stroke</dt><dd>Single uniform weight with rounded caps and joins. The inner echo holds 55% opacity to signal depth and motion.</dd>
+          <dt>Clear space</dt><dd>Minimum margin on every side equals the inner chevron's width. Never crowd the mark with type or graphics.</dd>
+          <dt>Minimum size</dt><dd>24px digital / 8mm print. Below this, drop the inner echo for legibility.</dd>
+        </dl>
+      </div>
+
+      <div class="subhead"><span class="n">2.4</span> Misuse — never do this</div>
+      <div class="misuse">
+        <div class="mcell squash"><div class="x">✕</div><div class="m" data-mark="duo"></div><span class="cap">Don't stretch or distort</span></div>
+        <div class="mcell rotate"><div class="x">✕</div><div class="m" data-mark="duo"></div><span class="cap">Don't rotate off-axis</span></div>
+        <div class="mcell recolor"><div class="x">✕</div><div class="m" data-mark="duo"></div><span class="cap">Don't recolor outside palette</span></div>
+        <div class="mcell crowd"><div class="x">✕</div><div class="m" data-mark="duo"></div><span class="fake accent">VVV</span><span class="cap">Don't crowd or re-typeset</span></div>
+      </div>
+    </section>
+
+    <!-- 03 COLOR -->
+    <section id="color">
+      <div class="eyebrow">03 <span class="dim">/ Color</span></div>
+      <h2 class="sec">Carbon &amp; <span class="accent">velocity red.</span></h2>
+      <p class="seclead">A near-black field, bone for reading, and a single scalpel of red. Click any swatch to copy its hex.</p>
+
+      <div class="swatches" id="swatches"></div>
+
+      <div class="discipline">
+        <div class="m" data-mark="duo"></div>
+        <p>The discipline rule: <b>red is a scalpel, not a coat of paint.</b> One dominant carbon field, bone for reading, red reserved for the single most important thing on screen — one CTA, one number, one word.</p>
+      </div>
+
+      <div class="subhead"><span class="n">3.1</span> Contrast &amp; accessibility</div>
+      <div class="ratio-tbl">
+        <div class="rh"><span>Pairing</span><span>Ratio</span><span>WCAG</span><span>Use for</span></div>
+        <div class="rr"><div class="pair"><span class="chip" style="background:#f4f2ec"></span><span class="chip" style="background:#08080a"></span>Bone on Carbon</div><span class="num">15.8:1</span><span class="pass">AAA</span><span style="color:var(--steel)">Body &amp; headings</span></div>
+        <div class="rr"><div class="pair"><span class="chip" style="background:#ff2b2b"></span><span class="chip" style="background:#08080a"></span>Red on Carbon</div><span class="num">4.6:1</span><span class="pass">AA</span><span style="color:var(--steel)">Large text, accents</span></div>
+        <div class="rr"><div class="pair"><span class="chip" style="background:#ffffff"></span><span class="chip" style="background:#ff2b2b"></span>White on Red</div><span class="num">3.9:1</span><span class="warn">AA Large</span><span style="color:var(--steel)">Buttons, ≥18px only</span></div>
+        <div class="rr"><div class="pair"><span class="chip" style="background:#8f8f97"></span><span class="chip" style="background:#08080a"></span>Steel on Carbon</div><span class="num">6.4:1</span><span class="pass">AA</span><span style="color:var(--steel)">Secondary / muted</span></div>
+      </div>
+    </section>
+
+    <!-- 04 TYPE -->
+    <section id="type">
+      <div class="eyebrow">04 <span class="dim">/ Typography</span></div>
+      <h2 class="sec">Two voices, <span class="accent">one system.</span></h2>
+      <p class="seclead">Be Vietnam Pro carries the message — confident, heavy at the top, and drawn with full Vietnamese diacritics so the name reads true in its home market. JetBrains Mono handles telemetry: labels, data, and the numbered tags that orient every section.</p>
+
+      <div class="type-grid">
+        <div>
+          <div class="type-spec">
+            <div class="aa">Aa</div>
+            <div class="fam"><b>Be Vietnam Pro</b> — display &amp; body · 400 / 500 / 800 / 900</div>
+            <div class="glyphs">ABCDEFGHIJKLM · abcdefghijklm · 0123456789</div>
+            <div style="font-size:1.5rem;font-weight:800;letter-spacing:-.01em;margin-top:.8rem;color:var(--bone)">Xây dựng với tốc độ Việt Nam</div>
+            <div class="fam" style="margin-top:.5rem">Full Vietnamese diacritics — <b>ăâđêôơư · áàảãạ ệ ố ự</b></div>
+          </div>
+          <div class="type-mono-card">
+            <div class="ms">JetBrains Mono</div>
+            <div class="sub">Telemetry · Labels · Data · 500</div>
+          </div>
+        </div>
+        <dl class="scale">
+          <dt class="s-disp">Build at velocity.</dt><dd>Display · Be Vietnam Pro 900 · −3% tracking · 0.9 line</dd>
+          <dt class="s-h">Same name. New machine.</dt><dd>Headline · Be Vietnam Pro 800 · −2.5% tracking</dd>
+          <dt class="s-body">Backing and building AI-native companies at Vietnam speed.</dt><dd>Body · Be Vietnam Pro 400–500 · 1.5 line</dd>
+          <dt class="s-mono">02 / The Mark</dt><dd>Telemetry label · JetBrains Mono 500 · +30% tracking · uppercase</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 05 VOICE -->
+    <section id="voice">
+      <div class="eyebrow">05 <span class="dim">/ Voice &amp; Tone</span></div>
+      <h2 class="sec">Operator-grade. <span class="accent">No theatre.</span></h2>
+      <p class="seclead">VVV talks like a builder who ships, not a fund that pitches. Short. Concrete. Proof over promise.</p>
+
+      <div class="voice-grid">
+        <div class="vbox"><h4>Direct</h4><p>Lead with the claim. Cut the throat-clearing. A sentence should survive being read once, fast.</p></div>
+        <div class="vbox"><h4>Concrete</h4><p>Numbers, names, dates. "Backed Kamereo in 2018" beats "deep ecosystem experience."</p></div>
+        <div class="vbox"><h4>Confident, not loud</h4><p>State it plainly and stop. The red does the shouting; the words stay calm.</p></div>
+      </div>
+
+      <div class="subhead"><span class="n">5.1</span> Say it / don't say it</div>
+      <div class="vs-grid">
+        <div class="vs yes">
+          <div class="vh">✓ On voice</div>
+          <ul>
+            <li>"I build the things I invest in."</li>
+            <li>"$15M+ raised. #1 in its category."</li>
+            <li>"One thesis: AI × Vietnam."</li>
+            <li>"Pick one. I'll ship it."</li>
+          </ul>
+        </div>
+        <div class="vs no">
+          <div class="vh">✕ Off voice</div>
+          <ul>
+            <li>"Leveraging synergies across the ecosystem."</li>
+            <li>"A diversified portfolio of innovative assets."</li>
+            <li>"We are passionate about disruption."</li>
+            <li>"Reach out to explore potential opportunities."</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subhead"><span class="n">5.2</span> Boilerplate — copy &amp; paste</div>
+      <div class="boiler">
+        <div class="bcard"><span class="len">~10 words</span><div class="lbl">Short</div><p data-copy>Solo builder-investor backing and building AI-native companies in Vietnam.</p><button class="copybtn" data-copy-prev>Copy</button></div>
+        <div class="bcard"><span class="len">~30 words</span><div class="lbl">Medium</div><p data-copy>Velocity Ventures Vietnam (VVV) is a solo builder-investor backing and building AI-native companies at the intersection of AI applications, AI infrastructure, and Vietnam — shipping 0→1 alongside founders.</p><button class="copybtn" data-copy-prev>Copy</button></div>
+        <div class="bcard"><span class="len">~55 words</span><div class="lbl">Long</div><p data-copy>Velocity Ventures Vietnam is a solo builder-investor at the intersection of AI and Vietnam. Founded on the 2019 call that Vietnam was at a tipping point — proven by an early bet on Kamereo, now the country's #1 B2B food platform with $15M+ raised — VVV now backs and builds AI-native companies, shipping product 0→1 at founder speed.</p><button class="copybtn" data-copy-prev>Copy</button></div>
+      </div>
+    </section>
+
+    <!-- 06 DESIGN LANGUAGE -->
+    <section id="language">
+      <div class="eyebrow">06 <span class="dim">/ Design Language</span></div>
+      <h2 class="sec">The recurring <span class="accent">signals.</span></h2>
+      <p class="seclead">Four devices repeat across every surface. Used sparingly, they make any artifact unmistakably VVV.</p>
+
+      <div class="lang">
+        <div class="lcell"><div class="demo demo-speed"></div><div><h4>Speed lines</h4><p>115° diagonal hatching as ambient texture — the motorsport undertone, always faint, never foreground.</p></div></div>
+        <div class="lcell"><div class="demo demo-redline"></div><div><h4>The redline</h4><p>A single red hairline divides and frames. Structure, not decoration. One per view.</p></div></div>
+        <div class="lcell"><div class="demo"><div class="demo-tag">02 / The Mark</div></div><div><h4>Telemetry tags</h4><p>Numbered mono eyebrows orient every section like a timing screen.</p></div></div>
+        <div class="lcell"><div class="demo demo-motion"><i></i><i></i><i></i><i></i></div><div><h4>Acceleration motion</h4><p>Staggered reveals on one easing curve — fast in, settled. Never bouncy.</p></div></div>
+      </div>
+    </section>
+
+    <!-- 07 APPLICATIONS -->
+    <section id="applications">
+      <div class="eyebrow">07 <span class="dim">/ Applications</span></div>
+      <h2 class="sec">The system, <span class="accent">in the wild.</span></h2>
+      <p class="seclead">How the mark and palette behave across the surfaces that matter most.</p>
+
+      <div class="apps">
+        <div class="app">
+          <div class="avatar"><div class="m" data-mark="duo"></div></div>
+          <span class="cap">Social avatar</span>
+        </div>
+        <div class="app">
+          <div class="appicon"><div class="m" data-mark="duo-white"></div></div>
+          <span class="cap">App icon / favicon</span>
+        </div>
+        <div class="app">
+          <div class="bizcard">
+            <div class="top"><div class="m" data-mark="duo"></div><div class="dt" style="text-align:right">VELOCITYVV.COM</div></div>
+            <div><div class="nm">Duc Trinh</div><div class="dt">SOLO BUILDER-INVESTOR</div></div>
+          </div>
+          <span class="cap">Business card</span>
+        </div>
+        <div class="app">
+          <button class="pillbtn">Build at velocity</button>
+          <span class="cap">Primary button</span>
+        </div>
+      </div>
+
+      <div class="subhead"><span class="n">7.1</span> Email signature — ready to paste</div>
+      <p class="note" style="color:var(--steel);font-size:.96rem;line-height:1.55;max-width:60ch;margin-bottom:1.4rem">Email-safe by construction: table layout, inline styles, and an Arial fallback so it holds up where Be Vietnam Pro can't load. <b style="color:var(--bone)">Copy signature</b> pastes formatted straight into Gmail, Outlook, or Apple Mail's signature settings.</p>
+
+      <div class="sig-wrap">
+        <div class="sig-stage">
+          <!-- ===== EMAIL-SAFE SIGNATURE (inline styles only) ===== -->
+          <table id="emailSig" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif;color:#08080a">
+            <tr>
+              <td style="padding:0 18px 0 0;border-right:2px solid #ff2b2b;vertical-align:middle">
+                <img src="data:image/png;base64,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" width="85" height="52" alt="Velocity Ventures Vietnam" style="display:block;border:0;outline:none;width:85px;height:52px">                
+              </td>
+              <td style="padding:0 0 0 18px;vertical-align:middle">
+                <div style="font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif;font-weight:700;font-size:15px;color:#08080a;line-height:1.3">Duc Trinh</div>
+                <div style="font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a72;margin-top:2px;line-height:1.4">Solo Builder-Investor &middot; Velocity Ventures Vietnam</div>
+                <div style="font-size:12px;margin-top:8px;line-height:1.4">
+                  <a href="mailto:duc@velocityvv.com" style="color:#ff2b2b;text-decoration:none;font-weight:600;font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif">duc@velocityvv.com</a>
+                  <span style="color:#cfcdc7">&nbsp;&middot;&nbsp;</span>
+                  <a href="https://velocityvv.com" style="color:#08080a;text-decoration:none;font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif">velocityvv.com</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding-top:12px">
+                <div style="font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif;font-weight:700;font-size:12px;color:#08080a;letter-spacing:-0.01em">Build at <span style="color:#ff2b2b">velocity.</span></div>
+              </td>
+            </tr>
+          </table>
+          <!-- ===== /SIGNATURE ===== -->
+        </div>
+        <div class="sig-bar">
+          <button class="btn solid" id="copySig">Copy signature</button>
+          <button class="copybtn" id="copySigText">Copy as plain text</button>
+          <button class="copybtn" id="copySigHTML">Copy HTML source</button>
+          <span class="sig-hint">Paste into your mail client's signature settings</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 DOWNLOADS -->
+    <section id="downloads">
+      <div class="eyebrow">08 <span class="dim">/ Asset Downloads</span></div>
+      <h2 class="sec">Take the <span class="accent">kit.</span></h2>
+      <p class="seclead">Every asset generates live from this page — no external files, always on-spec. SVG is vector and infinitely scalable; PNG exports render transparent at the size noted.</p>
+
+      <div class="dl-grid" id="dlgrid"></div>
+
+      <div class="subhead"><span class="n">8.1</span> Color tokens</div>
+      <div class="tokencode">
+        <div class="tc-head"><span class="fn">vvv-colors.css</span><button class="copybtn" id="copytokens">Copy CSS</button></div>
+        <pre id="tokenpre"></pre>
+      </div>
+
+      <p class="dl-note">
+        <span class="red">Need another format?</span> The mark is a clean two-path SVG — drop it into Figma, favicon generators, or print artwork directly.<br>
+        For the engineering-facing component library, tokens, and code, see the companion <a href="VVV Design System.html" style="color:var(--velocity);text-decoration:none">Product Design System →</a>
+      </p>
+    </section>
+
+    <footer>
+      <div class="who">Duc Trinh — Velocity Ventures Vietnam<span>Solo builder-investor · AI × Vietnam</span></div>
+      <a class="mail" href="mailto:duc@velocityvv.com">duc@velocityvv.com</a>
+      <a class="pagelink" href="VVV Design System.html">Product Design System →</a>
+    </footer>
+  </main>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+/* ============ MARK FACTORY ============ */
+const MARK = {
+  // primary single-echo duotone mark (uses currentColor)
+  duo: `<svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" style="display:block;overflow:visible"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 36 L60 62 L83 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg>`,
+  'duo-white': `<svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" style="display:block;overflow:visible"><path d="M14 36 L60 88 L106 36" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 36 L60 62 L83 36" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/></svg>`,
+  echo: `<svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" style="display:block;overflow:visible"><path d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 36 L60 62 L83 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg>`,
+  'echo-big': `<svg viewBox="0 0 120 120" fill="none" width="100%" height="100%" style="display:block;overflow:visible"><path style="opacity:.18" d="M14 40 L60 92 L106 40" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path style="opacity:.4" d="M14 36 L60 88 L106 36" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 32 L60 84 L106 32" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path style="opacity:.55" d="M37 32 L60 58 L83 32" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+};
+document.querySelectorAll('[data-mark]').forEach(el=>{ el.innerHTML = MARK[el.dataset.mark] || MARK.duo; });
+
+/* ============ COLOR DATA ============ */
+const COLORS = [
+  {nm:'Carbon',hex:'#08080A',role:'Background / base',var:'--carbon'},
+  {nm:'Velocity Red',hex:'#FF2B2B',role:'Primary accent',var:'--velocity'},
+  {nm:'Bone',hex:'#F4F2EC',role:'Primary ink',var:'--bone'},
+  {nm:'Graphite',hex:'#16161A',role:'Panels / cards',var:'--graphite'},
+  {nm:'Redline',hex:'#C40D0D',role:'Pressed / deep',var:'--redline'},
+  {nm:'Steel',hex:'#8F8F97',role:'Muted / secondary',var:'--steel'}
+];
+const swWrap = document.getElementById('swatches');
+COLORS.forEach(c=>{
+  const dark = ['#08080A','#16161A','#C40D0D','#FF2B2B'].includes(c.hex);
+  const el = document.createElement('div');
+  el.className='sw';
+  el.innerHTML = `<div class="fill" style="background:${c.hex}"><span class="copy" style="color:${dark?'#fff':'#08080a'}">Click to copy</span></div>
+    <div class="meta"><div class="nm">${c.nm}</div><div class="hex">${c.hex}</div><div class="role">${c.role}</div></div>`;
+  el.addEventListener('click',()=>copy(c.hex, c.hex+' copied'));
+  swWrap.appendChild(el);
+});
+
+/* ============ TOKEN CODE ============ */
+const tokenCSS = `:root{\n`+COLORS.map(c=>`  ${c.var}: ${c.hex};`).join('\n')+
+`\n  --line: rgba(255,255,255,.12);\n  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;\n  --font-mono: 'JetBrains Mono', monospace;\n}`;
+document.getElementById('tokenpre').innerHTML = tokenCSS
+  .replace(/(#[0-9A-Fa-f]{6}|rgba\([^)]+\))/g,'<span class="v">$1</span>')
+  .replace(/(:root\{|\})/g,'<span class="c">$1</span>');
+document.getElementById('copytokens').addEventListener('click',()=>copy(tokenCSS,'CSS tokens copied'));
+
+/* ============ DOWNLOAD ASSETS ============ */
+function svgFile(inner, size){
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="${size}" height="${size}" fill="none">\n${inner}\n</svg>`;
+}
+const CHEVRON = (color, echo=true) =>
+  `  <path d="M14 36 L60 88 L106 36" stroke="${color}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`+
+  (echo?`\n  <path d="M37 36 L60 62 L83 36" stroke="${color}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>`:'');
+
+const ASSETS = [
+  {id:'primary', nm:'Primary mark', desc:'Velocity-red chevron on transparent. The default everywhere.', prev:'oncarbon', mark:'duo', svg:()=>svgFile(CHEVRON('#FF2B2B'),120), png:[512,1024]},
+  {id:'reversed', nm:'Reversed (white)', desc:'White chevron for use on red or carbon photography.', prev:'onred', mark:'duo-white', svg:()=>svgFile(CHEVRON('#FFFFFF'),120), png:[512,1024]},
+  {id:'onbone', nm:'Red on bone', desc:'For light surfaces, print, and stationery.', prev:'onbone', mark:'duo', svg:()=>svgFile(CHEVRON('#FF2B2B'),120), png:[512]},
+  {id:'mono', nm:'Mono / carbon', desc:'Single-color carbon for embossing & one-color print.', prev:'onbone-k', mark:'duo', svg:()=>svgFile(CHEVRON('#08080A'),120), png:[512]},
+  {id:'favicon', nm:'Favicon / app icon', desc:'Rounded-square app icon, white mark on red. 512px PNG.', prev:'icon', mark:'icon', svg:()=>iconSVG(), png:[180,512]},
+  {id:'swatchset', nm:'Color swatches', desc:'All six brand colors as a JSON token file.', prev:'swatchset', mark:'swatch', json:true}
+];
+
+const dlGrid = document.getElementById('dlgrid');
+ASSETS.forEach(a=>{
+  const card = document.createElement('div');
+  card.className='dl-card';
+  let prevHTML;
+  if(a.prev==='icon'){ prevHTML = `<div class="appicon"><div class="m" style="width:42px;height:42px">${MARK['duo-white']}</div></div>`; }
+  else if(a.prev==='swatchset'){ prevHTML = COLORS.map(c=>`<i style="background:${c.hex}"></i>`).join(''); }
+  else { prevHTML = `<div class="m">${a.mark==='duo-white'?MARK['duo-white']:MARK.duo}</div>`; }
+  const btns = [];
+  if(a.svg) btns.push(`<button class="btn solid" data-dl="svg" data-id="${a.id}">SVG ↓</button>`);
+  if(a.png) a.png.forEach(s=>btns.push(`<button class="btn" data-dl="png" data-id="${a.id}" data-size="${s}">PNG ${s}</button>`));
+  if(a.json) btns.push(`<button class="btn solid" data-dl="json" data-id="${a.id}">JSON ↓</button>`);
+  card.innerHTML = `<div class="dl-prev ${a.prev}">${prevHTML}</div>
+    <div class="dl-body"><div class="nm">${a.nm}</div><div class="desc">${a.desc}</div><div class="btns">${btns.join('')}</div></div>`;
+  dlGrid.appendChild(card);
+});
+
+function iconSVG(){
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">\n  <rect width="512" height="512" rx="115" fill="#FF2B2B"/>\n  <path d="M120 190 L256 344 L392 190" stroke="#fff" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none"/>\n  <path d="M188 190 L256 267 L324 190" stroke="#fff" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>\n</svg>`;
+}
+
+function download(filename, content, type){
+  const blob = new Blob([content], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function pngFromSVG(svgText, size, filename){
+  const img = new Image();
+  const svgBlob = new Blob([svgText],{type:'image/svg+xml'});
+  const url = URL.createObjectURL(svgBlob);
+  img.onload = ()=>{
+    const cv = document.createElement('canvas'); cv.width=size; cv.height=size;
+    const ctx = cv.getContext('2d');
+    ctx.drawImage(img,0,0,size,size);
+    cv.toBlob(b=>{
+      const u = URL.createObjectURL(b); const a=document.createElement('a');
+      a.href=u; a.download=filename; document.body.appendChild(a); a.click();
+      document.body.removeChild(a); setTimeout(()=>URL.revokeObjectURL(u),1000);
+    },'image/png');
+    URL.revokeObjectURL(url);
+  };
+  img.src = url;
+}
+dlGrid.addEventListener('click',e=>{
+  const b = e.target.closest('[data-dl]'); if(!b) return;
+  const a = ASSETS.find(x=>x.id===b.dataset.id);
+  if(b.dataset.dl==='svg'){ download(`vvv-${a.id}.svg`, a.svg(), 'image/svg+xml'); toast('SVG downloaded'); }
+  if(b.dataset.dl==='png'){ const s=+b.dataset.size; pngFromSVG(a.svg(), s, `vvv-${a.id}-${s}.png`); toast(`PNG ${s}px downloading`); }
+  if(b.dataset.dl==='json'){
+    const obj = {}; COLORS.forEach(c=>obj[c.nm.toLowerCase().replace(/\s+/g,'-')] = {hex:c.hex, role:c.role, token:c.var});
+    download('vvv-colors.json', JSON.stringify(obj,null,2), 'application/json'); toast('JSON downloaded');
+  }
+});
+
+/* ============ COPY / TOAST ============ */
+const toastEl = document.getElementById('toast');
+let toastT;
+function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('show'),1800); }
+function copy(text, msg){ navigator.clipboard?.writeText(text).then(()=>toast(msg||'Copied')).catch(()=>toast('Copy failed')); }
+document.querySelectorAll('[data-copy-prev]').forEach(btn=>{
+  btn.addEventListener('click',()=>{ const p = btn.parentElement.querySelector('[data-copy]'); copy(p.textContent.trim(),'Boilerplate copied'); });
+});
+
+/* ============ EMAIL SIGNATURE COPY ============ */
+const sigNode = document.getElementById('emailSig');
+const sigText = `Duc Trinh\nSolo Builder-Investor · Velocity Ventures Vietnam\nduc@velocityvv.com · velocityvv.com\nBuild at velocity.`;
+async function copyRichSig(){
+  const html = sigNode.outerHTML;
+  try{
+    await navigator.clipboard.write([new ClipboardItem({
+      'text/html': new Blob([html],{type:'text/html'}),
+      'text/plain': new Blob([sigText],{type:'text/plain'})
+    })]);
+    toast('Signature copied — paste into your mail client');
+  }catch(e){
+    try{
+      const range=document.createRange(); range.selectNode(sigNode);
+      const sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      document.execCommand('copy'); sel.removeAllRanges();
+      toast('Signature copied — paste into your mail client');
+    }catch(_){ toast('Copy failed — try HTML source'); }
+  }
+}
+document.getElementById('copySig').addEventListener('click',copyRichSig);
+document.getElementById('copySigText').addEventListener('click',()=>copy(sigText,'Plain-text signature copied'));
+document.getElementById('copySigHTML').addEventListener('click',()=>copy(sigNode.outerHTML,'HTML source copied'));
+
+/* ============ NAV SCROLLSPY ============ */
+const navLinks=[...document.querySelectorAll('#navlist a')];
+const sections=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
+const spy=new IntersectionObserver(es=>{
+  es.forEach(en=>{ if(en.isIntersecting){ const id='#'+en.target.id; navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id)); } });
+},{rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s=>s&&spy.observe(s));
+
+/* mobile nav */
+const nav=document.getElementById('nav'), toggle=document.getElementById('navtoggle');
+toggle.addEventListener('click',()=>nav.classList.toggle('open'));
+navLinks.forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+</script>
+</body>
+</html>
